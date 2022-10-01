@@ -9,3 +9,4 @@ irmao_de(X,Y) :-
     homem(Y),
     pais(X,M,P),
     pais(Y,M,P).
+a(b).
