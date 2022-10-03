@@ -83,12 +83,7 @@ int main()
                 {
                     printf("em qual lugar da lista deseja inserir o livro? ");
                     scanf("%d",&ls);
-                    if(isdigit(c)==0)
-                    {
-                        printf("\ninsira somente numeros!\n\n");
-                        setbuf(stdin,0);
-                    }
-                    else if(ls<1||ls>5)
+                    if(ls<1||ls>5)
                     {
                     printf("\ninsira um numero de 1 a 5!\n\n");
                     }
@@ -113,12 +108,7 @@ int main()
                 {
                     printf("em qual local esta o livro que deseja remover da lista? ");
                     scanf("%d",&ls);
-                    if(isdigit(c)==0)
-                    {
-                        printf("\ninsira somente numeros!\n\n");
-                        setbuf(stdin,0);
-                    }
-                    else if(ls<1||ls>5)
+                    if(ls<1||ls>5)
                     {
                         printf("\ninsira um numero de 1 a 5!\n\n");
                     }
@@ -138,12 +128,7 @@ int main()
                 {
                     printf("qual o local do livro na lista que sera movido? ");
                     scanf("%d",&ls);
-                    if(isdigit(c)==0)
-                    {
-                        printf("\ninsira somente numeros!\n\n");
-                        setbuf(stdin,0);
-                    }
-                    else if(ls<1||ls>5)
+                    if(ls<1||ls>5)
                     {
                         printf("\ninsira um numero de 1 a 5!\n\n");
                     }
