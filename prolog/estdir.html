@@ -1,0 +1,22 @@
+<form>
+    <p><label>Nome do Cliente: <input name="nomeCliente" ></label></p>
+    <p><label>Telefone: <input type=tel name="telCliente"></label></p>
+    <p><label>E-mail: <input type=email name="emailCliente"></label></p>
+    <fieldset>
+     <legend> Tamanho da Pizza </legend>
+     <p><label> <input type=radio name=size value="p"> Pequena </label></p>
+     <p><label> <input type=radio name=size value="m"> Média </label></p>
+     <p><label> <input type=radio name=size value="g"> Grande </label></p>
+    </fieldset>
+    <fieldset>
+     <legend> Ingredientes </legend>
+     <p><label> <input type=checkbox name="ing" value="tom"> Tomate </label></p>
+     <p><label> <input type=checkbox name="ing" value="pre"> Presunto</label></p>
+     <p><label> <input type=checkbox name="ing" value="ceb"> cebola </label></p>
+     <p><label> <input type=checkbox name="ing" value="que"> Queijo </label></p>
+    </fieldset>
+    <p><label>Horário de entrega desejado: <input type=time min="11:00" max="21:00"
+    step="900" name="tempo"></label></p>
+    <p><label>Instruções para entrega: <textarea name="obs"></textarea></label></p>
+    <p><button>Enviar Pedido</button></p>
+</form>
