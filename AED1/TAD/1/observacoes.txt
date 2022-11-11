@@ -1,0 +1,8 @@
+->compilar o .c do include
+gcc -c estringue1.c -o estringue.o
+->compilar a main
+gcc -c  a.c -o Aout.o
+->compilar tudo num executavel só
+gcc -o Aout.exe Aout.o estringue.o
+->rodar
+./Aout.exe
