@@ -23,12 +23,19 @@ N is M-1.
 succ(M,N):-
 N is M+1.
 
-soma(0,N,N).
+/*soma(0,N,N).
 soma(M,N,R):-
 M>=0,
 pred(M,M1),
 succ(N,N1),
-soma(M1,N1,R).
+soma(M1,N1,R).*/
+
+soma(M,N,R):-soma(M,0,N,R).
+soma(M,M,N,N).
+soma(M,M0,N,R):-
+M1 is M0+1,
+succ(N,N1),
+soma(M,M1,N1,R).
 
 soman(-1,R,P):-
 P is R-1.
