@@ -22,8 +22,7 @@ int main()
         scanf("%d",&k);
         if(k==1)
         {
-            printf("escreva os caracteres da sua string, um por vez: ");
-            printf("se quiser parar, escreva '+'.");
+            printf("escreva uma string: ");
             scanf("%s",&h);
             o = criar(&h);
             i=1;
