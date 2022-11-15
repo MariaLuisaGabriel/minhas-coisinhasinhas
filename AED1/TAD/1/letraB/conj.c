@@ -159,10 +159,6 @@ Conj *intersecao(Conj *a,Conj *b)
             }
         }
         a->tam1 = u-1;
-        printf("\n\n\n\n");
-        for(int i=0;i<=a->tam1;i++)
-            printf("%d",a->precaucao[i]);
-        printf("\n\n\n\n");
         Conj *x = criar(p,u);
         return x;
     }
@@ -170,7 +166,7 @@ Conj *intersecao(Conj *a,Conj *b)
 
 void diferenca(Conj *a)
 {
-    printf("hehe");
+    int v=0;
     for(int i=0;i<a->tam;i++)
     {
         printf("%d",a->tam1);
@@ -178,18 +174,16 @@ void diferenca(Conj *a)
         {
             if(a->c[i]==a->precaucao[j])
             {
-                for(int f=i;f<a->tam;j++)
+                for(int f=i;f<a->tam;f++)
                 {
                     a->c[f]=a->c[f+1];
                 }
                 a->tam = a->tam - 1;
-                printf("/");
+                v++;
             }
-            printf(":");
         }
-        printf("*");
     }
-    if(a->tam == 0)
+    if(a->tam == 0||v==a->tam)
     {
         printf("\nconjunto: vazio\n");
     }

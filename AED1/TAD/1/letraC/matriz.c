@@ -28,7 +28,7 @@ void destruir(Matriz *a)
 void atribuir(Matriz *a,int i, int j)
 {
     printf("\nescreva o valor que quer atribuir: ");
-    scanf("%d",&(a->m[i][j]));
+    scanf("%d",&(a->m[i-1][j-1]));
     printf("\nvalor atribuido com sucesso.\n");
 }
 

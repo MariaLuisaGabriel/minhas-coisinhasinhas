@@ -11,14 +11,12 @@ int main()
     printf("colunas da primeira matriz: ");
     scanf("%d",&j);
     a = criar(i,j);
-    mostrar(a);
     printf("\n");
     printf("linhas da segunda matriz: ");
     scanf("%d",&i);
     printf("colunas da segunda matriz: ");
     scanf("%d",&j);
     b = criar(i,j);
-    mostrar(b);
     printf("\n");
 
     puts("PREENCHER MATRIZ;");
@@ -57,12 +55,13 @@ int main()
             printf("\nmaximo: ");
             scanf("%d",&z);
             preencher(a,y,z);
+            printf("\n");
+            mostrar(a);
             printf("\nescolha os limites do aleatorio;\nminimo: ");
             scanf("%d",&y);
             printf("\nmaximo: ");
             scanf("%d",&z);
             preencher(b,y,z);
-            mostrar(a);
             printf("\n");
             mostrar(b);
             break;
@@ -258,14 +257,8 @@ int main()
 
     puts("\nDESTRUIR MATRIZES;");
     destruir(a);
-    if(a==NULL)
-    {
-        printf("\nsucesso em destruir a primeira matriz.");
-    }
+    printf("\nsucesso em destruir a primeira matriz.");
     destruir(b);
-    if(b==NULL)
-    {
-        printf("\nsucesso em destruir a segunda matriz.");
-    }
+    printf("\nsucesso em destruir a segunda matriz.");
     return 0;
 }
