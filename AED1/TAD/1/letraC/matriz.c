@@ -14,7 +14,7 @@ Matriz *criar(int i, int j)
     Matriz *A = (Matriz *)malloc(sizeof(Matriz));
     A->m = (int **)malloc(i*sizeof(int));
     for(int k=0;k<i;k++)
-        A->m[k] = (int *)malloc(j*sizeof(int));
+        A->m[k] = (int *)calloc(j,sizeof(int));
     A->i = i;
     A->j = j;
     return A;
@@ -104,7 +104,7 @@ void mostrar(Matriz *a)
     {
         for(int j=0;j<a->j;j++)
         {
-            printf("%02d ",a->m[i][j]);
+            printf("%d ",a->m[i][j]);
         }
         printf("\n");
     }

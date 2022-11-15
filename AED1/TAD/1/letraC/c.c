@@ -11,11 +11,15 @@ int main()
     printf("colunas da primeira matriz: ");
     scanf("%d",&j);
     a = criar(i,j);
+    mostrar(a);
+    printf("\n");
     printf("linhas da segunda matriz: ");
     scanf("%d",&i);
     printf("colunas da segunda matriz: ");
     scanf("%d",&j);
     b = criar(i,j);
+    mostrar(b);
+    printf("\n");
 
     puts("PREENCHER MATRIZ;");
     printf("\nquer preencher com numeros aleatorios a primeira(1), segunda(2), nas duas matrizes(3) ou em nenhuma(0)?");
