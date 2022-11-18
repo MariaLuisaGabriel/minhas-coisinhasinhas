@@ -131,3 +131,11 @@ w1(X,Y) :- !, u(X), v(Y).
 w2(X,Y) :- u(X), !, v(Y). %passa so uma vez por u
 w3(X,Y) :- u(X), v(Y), !. %passa so uma vez por u e v
 %qualquer coisa, teste o w1, w2 e w3, um por vez.
+
+%implementar "not" fazendo uso de corte e fracasso.
+a(1).
+a(2).
+nao(P):-P,!,fail.%P confirma a existencia do relacionamento, fail força o fracasso(faz com que a analise seja falsa de imediato), e o ! limita a analise do prolog(nao permite que prolog volte para analisar nao(_), se entrar em nao(P) e chegar até fail).
+nao(_).%retorna verdade pois uma variavel anonima se unifica com qualquer valor
+
+%caso um relacionamento possua fail, aquele relacionamento vai ser sempre falso, ou por culpa de uma analise falsa antes de fail(que ja faz parar a analise naquele relacionamento), ou pelo fail em si(se todas as outras analises do relacionamento forem verdade, é necessario chegar até o fail para dizer que é falso).
