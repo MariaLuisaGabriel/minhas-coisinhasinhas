@@ -41,4 +41,6 @@ int tamanho(Lista *l);
 
 void mostrar(Lista *l);
 
+void mostrarAluno(struct aluno *a);
+
 #endif
