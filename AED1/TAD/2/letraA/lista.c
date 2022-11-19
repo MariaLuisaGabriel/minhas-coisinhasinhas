@@ -86,7 +86,7 @@ int removerInicio(Lista *l)
 {
     if(l==NULL) return 2;
     if(l->total == 0) return 0;
-    for(int i=l->total-1;i>0;i--)
+    for(int i=1;i<=l->total-1;i++)
         l->valores[i-1] = l->valores[i];
     l->total--;
     return 1;
@@ -107,11 +107,17 @@ int removerPosicao(Lista *l,int pos)
     if(l->total == 0) return 0;
     if(pos>MAX||pos<1) return 8;
     if(pos == l->total)
-        h = removerFim(l); return 1;
-    for(int i=pos;i<=l->total-1;i++)
-        l->valores[i-1] = l->valores[i];
-    l->total--;
-    return 1; 
+    {
+        h = removerFim(l);
+        return h;
+    }
+    else
+    {
+        for(int i=pos;i<=l->total-1;i++)
+            l->valores[i-1] = l->valores[i];
+        l->total--;
+        return 1; 
+    }
 }
 
 int removerItem(Lista *l,int chave)
@@ -124,20 +130,8 @@ int removerItem(Lista *l,int chave)
         if(l->valores[i].mat == chave)
         {
             j = removerPosicao(l,i+1);
-            switch(j)
-            {
-                case 0:
-                {
-                    printf("\nlista vazia!");
-                    return 0;
-                }
-                case 1:
-                {
-                    break;
-                }
-            }
+            return j;
         }
-        return 1;
     }
 }
 

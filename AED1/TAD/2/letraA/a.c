@@ -12,26 +12,30 @@ int main()
         puts("MENU DAS LISTAS:");
         puts("================");
         puts("0-sair;");
-        puts("1-criar lista;");
-        if(p==1)
+        if(p==0)
+            puts("1-criar lista;");
+        else
         {
-            puts("2-inserir aluno na lista;");
-            puts("3-remover aluno da lista;");
-            puts("4-buscar item da lista;");
-            puts("5-mostrar estado atual da lista;");
-            puts("6-limpar .");
+            puts("1-inserir aluno na lista;");
+            puts("2-remover aluno da lista;");
+            puts("3-buscar item da lista;");
+            puts("4-mostrar estado atual da lista;");
+            puts("5-limpar .");
         }
         printf("\nescreva seu comando->");
         scanf("%d",&j);
         if(j==0) break;
+        if(p==0 && j==1)
+        {
+            a = criar();
+            p=1;
+        }
+        else
+        {
+            j=j+1;
+        }
         switch(j)
         {
-            case 1:
-            {
-                a = criar();
-                p=1;
-                break;
-            }
             case 2:
             {
                 puts("\n");
