@@ -5,6 +5,7 @@
 int main()
 {
     int p=0,pos,j,r,z;
+    float poss;
     struct aluno it,retorno;
     Lista *a;
     while(1)
@@ -22,7 +23,8 @@ int main()
             puts("4-mostrar estado atual da lista;");
             puts("5-verificar se a lista contem um certo elemento por matricula;");
             puts("6-inverter a posiçao de todos os elementos da lista;");
-            puts("7-limpar .");
+            puts("7-contar a quantidade de ocorrencias de uma certa nota entre os alunos;");
+            puts("8-limpar .");
         }
         printf("\nescreva seu comando->");
         scanf("%d",&j);
@@ -246,6 +248,22 @@ int main()
                 break;
             }
             case 8:
+            {
+                printf("\nescreva a nota que procura verificar a ocorrencia(com um ponto em vez de virgula): ");
+                scanf("%f",&poss);
+                r = contaitem(a,poss);
+                switch(r)
+                {
+                    case -1:
+                        printf("\nlista inexistente!\n");p=0;break;
+                    case 0:
+                        printf("\nnao ha alunos com essa nota!\n");break;
+                    default:
+                        printf("\n%d alunos tiveram essa nota\n",r);break;
+                }
+                break;
+            }
+            case 9:
             {
                 limpar(a);
                 break;

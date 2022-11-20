@@ -47,4 +47,6 @@ int contemItem(Lista *l,int pos);
 
 int Reversa(Lista *l);
 
+int contaitem(Lista *l, float poss);
+
 #endif

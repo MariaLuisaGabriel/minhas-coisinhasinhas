@@ -233,3 +233,17 @@ int Reversa(Lista *l)
     }
     return 1;
 }
+
+int contaitem(Lista *l,float poss)
+{
+    int u=0;
+    if(l==NULL) return -1;
+    for(int i=0;i<l->total;i++)
+    {
+        if(l->valores[i].n1==poss)
+        {
+            u++;
+        }
+    }
+    return u;
+}
