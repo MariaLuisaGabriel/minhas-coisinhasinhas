@@ -137,6 +137,7 @@ int removerItem(Lista *l,int chave)
 
 int buscarItemChave(Lista*l,int chave,struct aluno *retorno)
 {
+    int r=0;
     if(l == NULL) return 2;
     if(l->total == 0) return 0;
     for(int i=0;i<l->total;i++)
@@ -144,16 +145,18 @@ int buscarItemChave(Lista*l,int chave,struct aluno *retorno)
         if(l->valores[i].mat == chave)
         {
             *retorno = l->valores[i];
+            r = 1;
         }
     }
-    return 1;
+    if(r==1) return 1;
+    else return 8;
 }
 
 int buscarPosicao(Lista *l,int pos,struct aluno *retorno)
 {
     if(l == NULL) return 2;
     if(l->total == 0) return 0;
-    if(pos>MAX||pos<1) return 8;
+    if(pos>l->total||pos<1) return 8;
     *retorno = l->valores[pos-1];
     return 1;
 }
@@ -197,4 +200,5 @@ void mostrarAluno(struct aluno *a)
     printf("\naluno: %s.",a->nome);
     printf("\nmatricula: %d.",a->mat);
     printf("\nnota: %f.",a->n1);
+    printf("\n");
 }

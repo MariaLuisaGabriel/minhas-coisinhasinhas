@@ -189,6 +189,8 @@ int main()
                             printf("\nlista vazia!\n");break;
                         case 2:
                             printf("\nlista inexistente!\n");p=0;break;
+                        case 8:
+                            printf("\naluno nao existe na lista!\n");break;
                     }
                 }
                 if(z==2)
@@ -224,9 +226,12 @@ int main()
             }
         }
     }
-    puts("FIM DA EDICAO DA LISTA!!");
-    printf("\ntamanho final da lista: %d\n",tamanho(a));
-    puts("LISTA CRIADA: ");
-    mostrar(a);
+    if(p!=0)
+    {
+        puts("FIM DA EDICAO DA LISTA!!");
+        printf("\ntamanho final da lista: %d\n",tamanho(a));
+        puts("LISTA CRIADA: ");
+        mostrar(a);
+    }
     return 0;
 }
