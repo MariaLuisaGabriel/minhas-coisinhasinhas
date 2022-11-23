@@ -152,3 +152,16 @@ fat(F,K),
 F1 is F+1,
 T1 is T + H//K,
 taylor(X,N1,F1,T1,R).
+
+
+insere(X,[],[X]).
+insere(X,[Y|Z],[X|[Y|Z]]).
+tira([X],[],X).
+tira([X|Z],Z,X).
+
+bin([Y|[X|Z]],R):-bin(Y,X,0,Z,[],R),!.
+bin(Y,X,X,[],R,R):-!.
+bin(Y,X,X1,[],R1,R):-
+        X2 is X1+1,
+        insere(Y,R1,R2),
+        bin(Y,X,X2,[],R2,R).
