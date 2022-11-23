@@ -154,14 +154,56 @@ T1 is T + H//K,
 taylor(X,N1,F1,T1,R).
 
 
+
+par(X):- (X mod 2) =:= 0.
+impar(X):- not(par(X)).
+
+tira([Y|Z],Y).
+
+qtdd([_],1).
+qtdd(Z,T):-qtdd(Z,T,0).
+qtdd([],T,T).
+qtdd([X|W],T,T1):-
+T2 is T1+1,
+qtdd(W,T,T2).
+
+elemento(T,[Y|Z],R):-elemento(T,0,[Y|Z],[],R).
+elemento(T,T,_,R,R).
+elemento(T,T1,[Y|Z],R1,R):-
+T2 is T1+1,
+tira([Y|Z],R2),
+elemento(T,T2,Z,R2,R).
+
 insere(X,[],[X]).
 insere(X,[Y|Z],[X|[Y|Z]]).
-tira([X],[],X).
-tira([X|Z],Z,X).
 
-bin([Y|[X|Z]],R):-bin(Y,X,0,Z,[],R),!.
-bin(Y,X,X,[],R,R):-!.
-bin(Y,X,X1,[],R1,R):-
-        X2 is X1+1,
-        insere(Y,R1,R2),
-        bin(Y,X,X2,[],R2,R).
+insira(Y,X,R1,R):-insira(Y,X,0,R1,R).
+insira(Y,X,X,R,R).
+insira(Y,X,X1,R1,R):-
+X2 is X1+1,
+insere(Y,R1,R2),
+insira(Y,X,X2,R2,R).
+
+bin([Y|Z],R):-qtdd(Z,T),bin(Y,Z,T,R).
+
+bin(Y,Z,T,R):-Y=:=0,par(T),Y1 is 1,bin(Y1,Z,T,[],R).
+bin(Y,Z,T,R):-Y=:=1,par(T),Y1 is 0,bin(Y1,Z,T,[],R).
+bin(Y,Z,T,R):-impar(T),bin(Y,Z,T,[],R).
+
+bin(Y,Z,0,R,R).
+
+bin(Y,Z,T,R1,R):-
+Y=:=0,
+elemento(T,Z,X),
+insira(Y,X,R1,R2),
+T1 is T-1,
+Y1 is 1,
+bin(Y1,Z,T1,R2,R).
+
+bin(Y,Z,T,R1,R):-
+Y=:=1,
+elemento(T,Z,X),
+insira(Y,X,R1,R2),
+T1 is T-1,
+Y1 is 0,
+bin(Y1,Z,T1,R2,R).
