@@ -158,25 +158,28 @@ taylor(X,N1,F1,T1,R).
 par(X):- (X mod 2) =:= 0.
 impar(X):- not(par(X)).
 
+%separa a cabeça da lista em uma unica variavel
 tira([Y|Z],Y).
 
-qtdd([_],1).
+%varre a funçao ate chegar em lista vazia, e a cada vez que se ignora uma cabeça, se acrescenta 1 num contador (quando se chega a lista vazia, o valor do contador é dado como resposta para o tamanho da lista)
 qtdd(Z,T):-qtdd(Z,T,0).
 qtdd([],T,T).
 qtdd([X|W],T,T1):-
 T2 is T1+1,
 qtdd(W,T,T2).
 
-elemento(T,[Y|Z],R):-elemento(T,0,[Y|Z],[],R).
-elemento(T,T,_,R,R).
-elemento(T,T1,[Y|Z],R1,R):-
+%faz uma varredura na lista dada T vezes, e a cada passo, se guarda em uma variavel uma copia da cabeça da lista analisada (se a funçao chegar em T, a cabeça guardada é a resposta da funçao)
+buscaelemento(T,[Y|Z],R):-buscaelemento(T,0,[Y|Z],[],R).
+buscaelemento(T,T,_,R,R).
+buscaelemento(T,T1,[Y|Z],R1,R):-
 T2 is T1+1,
 tira([Y|Z],R2),
-elemento(T,T2,Z,R2,R).
+buscaelemento(T,T2,Z,R2,R).
 
 insere(X,[],[X]).
 insere(X,[Y|Z],[X|[Y|Z]]).
 
+%insere X vezes em R1, se R1 esta vazia, usa a base 1 do insere, caso contrario, usa a base 2 do insere até chegar em X vezes
 insira(Y,X,R1,R):-insira(Y,X,0,R1,R).
 insira(Y,X,X,R,R).
 insira(Y,X,X1,R1,R):-
@@ -184,25 +187,30 @@ X2 is X1+1,
 insere(Y,R1,R2),
 insira(Y,X,X2,R2,R).
 
+%a funcao bin se divide em primeira cabeça, cauda, tamanho da cauda e resultado
 bin([Y|Z],R):-qtdd(Z,T),bin(Y,Z,T,R).
 
+%como mechemos do fim para o inicio da cauda, é importante saber qual o conteúdo do ultimo conjunto de numeros(1 ou 0), o que depende do comprimento da cauda
 bin(Y,Z,T,R):-Y=:=0,par(T),Y1 is 1,bin(Y1,Z,T,[],R).
 bin(Y,Z,T,R):-Y=:=1,par(T),Y1 is 0,bin(Y1,Z,T,[],R).
 bin(Y,Z,T,R):-impar(T),bin(Y,Z,T,[],R).
 
+%quando a analise de todos os elementos da cauda(a cada vez que acaba de analisar um, decresce em um no total de elementos), a cadeia acumulada se torna a resposta
 bin(Y,Z,0,R,R).
 
+%para cabeça 0, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cauda pelo valor contrario e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
 bin(Y,Z,T,R1,R):-
 Y=:=0,
-elemento(T,Z,X),
+buscaelemento(T,Z,X),
 insira(Y,X,R1,R2),
 T1 is T-1,
 Y1 is 1,
 bin(Y1,Z,T1,R2,R).
 
+%para cabeça 1, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cauda pelo valor contrario e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
 bin(Y,Z,T,R1,R):-
 Y=:=1,
-elemento(T,Z,X),
+buscaelemento(T,Z,X),
 insira(Y,X,R1,R2),
 T1 is T-1,
 Y1 is 0,
