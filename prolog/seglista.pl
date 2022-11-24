@@ -153,7 +153,7 @@ F1 is F+1,
 T1 is T + H//K,
 taylor(X,N1,F1,T1,R).
 
-
+%decimal -> "binario".
 
 par(X):- (X mod 2) =:= 0.
 impar(X):- not(par(X)).
@@ -176,6 +176,7 @@ T2 is T1+1,
 tira([Y|Z],R2),
 buscaelemento(T,T2,Z,R2,R).
 
+%só coloca do lado mais esquerdo o novo elemento
 insere(X,[],[X]).
 insere(X,[Y|Z],[X|[Y|Z]]).
 
@@ -191,14 +192,14 @@ insira(Y,X,X2,R2,R).
 bin([Y|Z],R):-qtdd(Z,T),bin(Y,Z,T,R).
 
 %como mechemos do fim para o inicio da cauda, é importante saber qual o conteúdo do ultimo conjunto de numeros(1 ou 0), o que depende do comprimento da cauda
-bin(Y,Z,T,R):-Y=:=0,par(T),Y1 is 1,bin(Y1,Z,T,[],R).
-bin(Y,Z,T,R):-Y=:=1,par(T),Y1 is 0,bin(Y1,Z,T,[],R).
-bin(Y,Z,T,R):-impar(T),bin(Y,Z,T,[],R).
+bin(Y,Z,T,R):-Y=:=0,par(T),Y1 is 1,bin(Y1,Z,T,[],R),!.
+bin(Y,Z,T,R):-Y=:=1,par(T),Y1 is 0,bin(Y1,Z,T,[],R),!.
+bin(Y,Z,T,R):-impar(T),bin(Y,Z,T,[],R),!.
 
 %quando a analise de todos os elementos da cauda(a cada vez que acaba de analisar um, decresce em um no total de elementos), a cadeia acumulada se torna a resposta
 bin(Y,Z,0,R,R).
 
-%para cabeça 0, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cauda pelo valor contrario e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
+%para cabeça 0, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cabeça pelo valor contrario(0->1) e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
 bin(Y,Z,T,R1,R):-
 Y=:=0,
 buscaelemento(T,Z,X),
@@ -207,7 +208,7 @@ T1 is T-1,
 Y1 is 1,
 bin(Y1,Z,T1,R2,R).
 
-%para cabeça 1, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cauda pelo valor contrario e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
+%para cabeça 1, verifica o elemento da posicao T da cauda, e insere X vezes (X é o elemento da posiçao T da cauda) o valor da cabeça original na lista a acumular. assim que acaba o processo, troca a cabeça pelo valor contrario(1->0) e descresce em 1 o T(o elemento em T ja foi totalmente aproveitado).
 bin(Y,Z,T,R1,R):-
 Y=:=1,
 buscaelemento(T,Z,X),
@@ -215,3 +216,27 @@ insira(Y,X,R1,R2),
 T1 is T-1,
 Y1 is 0,
 bin(Y1,Z,T1,R2,R).
+
+%"binario" -> decimal
+
+binario(0).
+binario(1).
+
+%recebe a lista, e a separa em cauda e cabeça, a cabeça original da lista se torna a cabeça da resposta. é verificado se realmente a cabeça é binaria. se tudo der certo, é chamada uma nova funçao que tem a cauda original, a cabeça original, um contador e a area de resposta.
+fila([H|T], [H|X]):-
+  binario(H),
+  fila(T, H, 1, X),!.
+
+%essa é a condiçao de parada(que sempre vai ocorrer na funçao da linha 237): quando acaba os elementos da lista analisada, seja qual for a cabeça dessa lista, agora a lista resposta para [] é o valor do contador.
+fila([], _, N, X):-
+  X=[N],!.
+
+%essa é uma funçao que é chamada se a cabeça de T for de um valor diferente da cabeça da lista anteriormente analisada(isso significa que a contagem para elementos iguais consecutivos acabou). enquanto a troca acontece, X(lista-resposta) recebe a quantidade de elementos contados antes da diferença entre H e H1.
+fila([H|T], H1, N, [N|X]):-
+  H \= H1,
+  fila(T, H, 1, X).
+
+%essa é uma funçao que é chamada se a cabeça de T for de mesmo valor que a cabeça da lista anteriormente analisada(isso significa que nao acabou a contagem de elementos iguais consecutivos). enquanto a contagem acontece, X(lista-resultado) é simplesmente carregado.
+fila([H|T], H, N, X):-
+  N1 is N+1,
+  fila(T, H, N1, X).
