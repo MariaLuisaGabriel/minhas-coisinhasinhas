@@ -52,6 +52,4 @@ int concatena(Lista *l,Lista *m,Lista *result);
 
 int maiorNota(Lista *l,struct aluno *retorno);
 
-void listamat(Lista *l, int *n);
-
 #endif
