@@ -299,7 +299,6 @@ void mostrarAluno(struct aluno *a)
 
 int contemItem(Lista *l, int chave)
 {
-    printf("CONTEM ITEM");
     int i = tamanho(l),j=1;
     if(l == NULL) return 2;
     if(l->inicio == NULL) return -1;
@@ -332,10 +331,8 @@ int maiorNota(Lista *l,struct aluno *retorno)
     No *nolista = l->inicio;
     while(nolista != NULL)
     {
-        printf("uai");
         if(((nolista->valores).n1)>m)
         {
-            printf("uaaai");
             m=(nolista->valores).n1;
             n=(nolista->valores).mat;
         }
@@ -356,20 +353,4 @@ int concatena(Lista *l,Lista *m,Lista *result)
     nolista->prox = m->inicio;
     result->inicio = l->inicio;
     return 1;
-}
-
-void listamat(Lista *l,int *n)
-{
-    printf("LISTAMAT");
-    n = (int *)malloc(sizeof(int));
-    int k = tamanho(l),j=1;
-    No *nolista = l->inicio;
-    while(nolista!= NULL)
-    {
-        n[j-1] = (nolista->valores).mat;
-        n = (int *)realloc(n,(j+1)*sizeof(int));
-        nolista = nolista->prox;
-    }
-    for(int i = 0;i<k;i++)
-        printf("%d",n[i]);
 }
