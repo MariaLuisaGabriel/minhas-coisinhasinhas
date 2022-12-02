@@ -200,12 +200,6 @@ int buscarItemChave(Lista*l,int chave,struct aluno *retorno)
         }
         nolista = nolista->prox;
     }
-    /*//para caso o ultimo elemento tenha a chave
-    if((nolista->valores).mat == chave)
-    {
-        *retorno = nolista->valores;
-        return 1;
-    }*/
     return 8;
 }
 

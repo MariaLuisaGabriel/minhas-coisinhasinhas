@@ -90,23 +90,23 @@ int main()
             case 2:
             {
                 puts("\n");
-                puts("INSERCAO DE ELEMENTOS:");
-                puts("======================");
-                puts("1-inserir no inicio da lista;");
+                puts("CADASTRAR ALUNO:");
+                puts("================");
+                puts("1-cadastrar no inicio da lista;");
                 if(k==1)
                 {
                     if(A==0)
                         {
-                            puts("2-inserir no final da lista;");
-                            puts("3-inserir numa posicao especifica.");
+                            puts("2-cadastrar no final da lista;");
+                            puts("3-cadastrar numa posicao especifica.");
                         }
                 }
                 else
                 {
                     if(A==0)
                         {
-                            puts("2-inserir no final da lista;");
-                            puts("3-inserir numa posicao especifica.");
+                            puts("2-cadastrar no final da lista;");
+                            puts("3-cadastrar numa posicao especifica.");
                         }
                 }
                 printf("\n->");
