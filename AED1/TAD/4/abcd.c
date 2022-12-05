@@ -5,8 +5,8 @@
 int main()
 {
     int pA=0,pB=0,pos,j,r,z,k,o=0,n0=0,n1=0,A;
-    AL it,retorno;
-    Lista *a,*b,*c;
+    AL it,*retorno;
+    Lista *a,*b;
     while(1)
     {
         if(o==0)
@@ -38,8 +38,8 @@ int main()
                 puts("5-trocar dois elementos de posicao na lista;");
                 puts("6-verificar se ha semelhanca entre as duas listas;");
                 puts("7-verificar se a lista esta em ordem crescente;");
-                puts("7-limpar lista;");
-                puts("8-mudar de lista.");
+                puts("8-limpar lista;");
+                puts("9-mudar de lista.");
             }
             break;
         }
@@ -58,8 +58,8 @@ int main()
                 puts("5-trocar dois elementos de posicao na lista;");
                 puts("6-verificar se ha semelhanca entre as duas listas;");
                 puts("7-verificar se a lista esta em ordem crescente;");
-                puts("7-limpar lista;");
-                puts("8-mudar de lista.");
+                puts("8-limpar lista;");
+                puts("9-mudar de lista.");
             }
             break;
         }
@@ -124,17 +124,17 @@ int main()
                     {
                         if(k==1)
                         {
-                            r = inserirInicio(a,it);
+                            r = cadastrarinicio(a,&it);
                         }
                         else 
                         {
-                            r = inserirInicio(b,it);
+                            r = cadastrarinicio(b,&it);
                         }
                         switch(r)
                         {
-                            case 1:
+                            case 0:
                                 break;
-                            case 2:
+                            case -1:
                             {
                                 if(k==1)
                                 {
@@ -154,11 +154,11 @@ int main()
                     }
                     case 2:
                     {
-                        if(k==1) r = inserirFim(a,it);
-                        else r = inserirFim(b,it);
+                        if(k==1) r = cadastrarfim(a,&it);
+                        else r = cadastrarfim(a,&it);
                         switch(r)
                         {
-                            case 2:
+                            case -1:
                             {
                                 if(k==1)
                                 {
@@ -179,11 +179,11 @@ int main()
                     {
                         printf("\ninsira a posicao desejada(posicao minima: 0,posicao maxima: 100, o dado sera alocado n): ");
                         scanf("%d",&pos);
-                        if(k==1) r = inserirPosicao(a,it,pos);
-                        else r = inserirPosicao(b,it,pos);
+                        if(k==1) r = cadastrarposicao(a,&it,pos);
+                        else r = cadastrarposicao(a,&it,pos);
                         switch(r)
                         {
-                            case 2:
+                            case -1:
                             {
                                 if(k==1)
                                 {
@@ -197,7 +197,7 @@ int main()
                                 }
                                 break;
                             }
-                            case 8:
+                            case 1:
                                 printf("\nposicao atras dos limites da lista!");break;
                         }
                         break;
@@ -213,21 +213,19 @@ int main()
                 puts("1-remover do inicio da lista;");
                 puts("2-remover do final da lista;");
                 puts("3-remover de uma posicao especifica;");
-                puts("4-remover por chave de matricula;");
-                puts("5-remover tudo a partir de uma certa posiçao.");
                 printf("\n->");
                 scanf("%d",&z);
                 switch(z)
                 {
                     case 1:
                     {
-                        if(k==1) r = removerInicio(a);
-                        else r = removerInicio(b);
+                        if(k==1) r = removerinicio(a);
+                        else r = removerinicio(b);
                         switch(r)
                         {
-                            case 0:
+                            case 1:
                                 printf("\nlista vazia!\n");break;
-                            case 2:
+                            case -1:
                             {
                                 if(k==1)
                                 {
@@ -246,13 +244,13 @@ int main()
                     }
                     case 2:
                     {
-                        if(k==1) r = removerFim(a);
-                        else r = removerFim(b);
+                        if(k==1) r = removerfim(a);
+                        else r = removerfim(b);
                         switch(r)
                         {
-                            case 0:
+                            case 1:
                                 printf("\nlista vazia!\n");break;
-                            case 2:
+                            case -1:
                             {
                                 if(k==1)
                                 {
@@ -273,71 +271,13 @@ int main()
                     {
                         printf("\ninsira a posicao desejada(posicao minima: 0, posicao maxima: 100, o dado sera alocado n): ");
                         scanf("%d",&pos);
-                        if(k==1) r = removerPosicao(a,pos);  
-                        else removerPosicao(b,pos);               
+                        if(k==1) r = removerposicao(a,pos);  
+                        else removerposicao(b,pos);               
                         switch(r)
                         {
-                            case 0:
+                            case -3:
                                 printf("\nlista vazia!\n");break;
-                            case 2:
-                            {
-                                if(k==1)
-                                {
-                                    printf("\nlista inexistente!");
-                                    pA=0;
-                                }
-                                else
-                                {
-                                    printf("\nlista inexistente!");
-                                    pB=0;
-                                }
-                                break;
-                            }
-                            case 8:
-                                printf("\nposicao alem dos limites da lista!");break;
-                        }
-                        break;
-                    }
-                    case 4:
-                    {
-                        printf("\ninsira a chave de matricula:");
-                        scanf("%d",&pos);
-                        if(k==1) r = removerItem(a,pos);
-                        else r = removerItem(b,pos);
-                        switch(r)
-                        {
-                            case 0:
-                                printf("\nlista vazia!\n");break;
-                            case 2:
-                            {
-                                if(k==1)
-                                {
-                                    printf("\nlista inexistente!");
-                                    pA=0;
-                                }
-                                else
-                                {
-                                    printf("\nlista inexistente!");
-                                    pB=0;
-                                }
-                                break;
-                            }
                             case -1:
-                                printf("\nelemento nao existe na lista!\n");break;
-                        }
-                        break;
-                    }
-                    case 5:
-                    {
-                        printf("\ninsira a posicao desejada(posicao minima: 0, posicao maxima: 100, o dado sera alocado n): ");
-                        scanf("%d",&pos);
-                        if(k==1) r = removerapartir(a,pos);
-                        else r = removerapartir(b,pos);                 
-                        switch(r)
-                        {
-                            case 0:
-                                printf("\nlista vazia!\n");break;
-                            case 2:
                             {
                                 if(k==1)
                                 {
@@ -351,7 +291,7 @@ int main()
                                 }
                                 break;
                             }
-                            case 8:
+                            case 1:
                                 printf("\nposicao alem dos limites da lista!");break;
                         }
                         break;
@@ -359,77 +299,7 @@ int main()
                 }
                 break;
             }
-            case 4:
-            {
-                puts("BUSCA POR ITEM:");
-                puts("===============");
-                puts("1-busca por chave de matricula;");
-                puts("2-busca por posicao na lista.");
-                printf("\n->");
-                scanf("%d",&z);
-                if(z==1)
-                {
-                    printf("\ninsira a chave de matricula: ");
-                    scanf("%d",&pos);
-                    if(k==1) r = buscarItemChave(a,pos,&retorno);
-                    else r = buscarItemChave(b,pos,&retorno);
-                    switch(r)
-                    {
-                        case 1:
-                            mostrarAluno(&retorno);break;
-                        case 0:
-                            printf("\nlista vazia!\n");break;
-                        case 2:
-                            {
-                                if(k==1)
-                                {
-                                    printf("\nlista inexistente!");
-                                    pA=0;
-                                }
-                                else
-                                {
-                                    printf("\nlista inexistente!");
-                                    pB=0;
-                                }
-                                break;
-                            }
-                        case 8:
-                            printf("\naluno nao existe na lista!\n");break;
-                    }
-                }
-                if(z==2)
-                {
-                    printf("\ninsira a posicao do aluno na fila: ");
-                    scanf("%d",&pos);
-                    if(k==1) r = buscarPosicao(a,pos,&retorno);
-                    else r = buscarPosicao(b,pos,&retorno);
-                    switch(r)
-                    {
-                        case 1:
-                            mostrarAluno(&retorno);break;
-                        case 0:
-                            printf("\nlista vazia!\n");break;
-                        case 2:
-                            {
-                                if(k==1)
-                                {
-                                    printf("\nlista inexistente!");
-                                    pA=0;
-                                }
-                                else
-                                {
-                                    printf("\nlista inexistente!");
-                                    pB=0;
-                                }
-                                break;
-                            }
-                        case 8:
-                            printf("\nposicao alem dos limites da lista!");break;
-                    }
-                }
-                break;
-            }
-            case 5:
+            case 4://mostrar estado atual da lista
             {
                 if(k==1)
                 {
@@ -445,22 +315,19 @@ int main()
                 }
                 break;
             }
-            case 6:
+            case 5://maior nota da lista
             {
                 if(k==1) 
                 {
-                    printf("yey");
-                    r = maiorNota(a,&retorno);
+                    r = maiornota(a,retorno);
                 }
                 else
                 {
-                    r = maiorNota(b,&retorno);
+                    r = maiornota(b,retorno);
                 }
                 switch(r)
                 {
-                    case 0:
-                        printf("\nlista inexistente!");break;
-                    case 2:
+                    case -1:
                     {
                         if(k==1)
                         {
@@ -475,14 +342,132 @@ int main()
                         break;
                     }
                     case 1:
+                        printf("\nlista vazia!\n");break;
+                    case 0:
                     {
                         puts("o aluno com maior nota da lista é:");
-                        mostrarAluno(&retorno);
+                        mostrarAluno(retorno);
+                        break;
                     }
                 }
                 break;
             }
-            case 7:
+            case 6://trocar dois elementos de posicao
+            {
+                printf("\nescreva duas posicoes que deseja trocar: ");
+                scanf("%d %d",&pos,&z);
+                if(k==1)
+                {
+                    r = troca(a,pos,z);
+                    switch(r)
+                    {
+                        case -3:
+                            printf("\nlista vazia!\n");break;
+                        case -1:
+                        {
+                            if(k==1)
+                            {
+                                printf("\nlista inexistente!");
+                                pA=0;
+                            }
+                            else
+                            {
+                                printf("\nlista inexistente!");
+                                pB=0;
+                            }
+                            break;
+                        }
+                        case 1:
+                            printf("\nposicao alem dos limites da lista!");break;
+                        }
+                    break;
+                }
+                else
+                {
+                    r = troca(b,pos,z);
+                    switch(r)
+                    {
+                        case -3:
+                            printf("\nlista vazia!\n");break;
+                        case -1:
+                        {
+                            if(k==1)
+                            {
+                                printf("\nlista inexistente!");
+                                pA=0;
+                            }
+                            else
+                            {
+                                printf("\nlista inexistente!");
+                                pB=0;
+                            }
+                            break;
+                        }
+                        case 1:
+                            printf("\nposicao alem dos limites da lista!");break;
+                        }
+                    break;
+                }
+            }
+            case 7://verificar semelhança entre duas listas
+            {
+                r = semelhanca(a,b);
+                switch(r)
+                {
+                    case -1:
+                        printf("\nlista vazia!\n");break;
+                    case 1:
+                    {
+                        printf("\nlista 1 e 2 nao sao semelhantes.");
+                        break;
+                    }
+                }
+                break;
+            }
+            case 8://verificar ordem da lista
+            {
+                if(k==1)
+                {
+                    r = ordemmat(a);
+                    switch(r)
+                    {
+                        case -1:
+                        {
+                            printf("\nlista inexistente!");
+                            pA = 0;
+                        }
+                        case 2:
+                        {
+                            printf("\nlista vazia!");
+                        }
+                        case 1:
+                            printf("\na lista nao esta em ordem crescente.");break;
+                        case 0:
+                            printf("\na lista esta em ordem crescente.");break;
+                    }
+                }
+                else
+                {
+                    r = ordemmat(b);
+                    switch(r)
+                    {
+                        case -1:
+                        {
+                            printf("\nlista inexistente!");
+                            pA = 0;
+                        }
+                        case 2:
+                        {
+                            printf("\nlista vazia!");
+                        }
+                        case 1:
+                            printf("\na lista nao esta em ordem crescente.");break;
+                        case 0:
+                            printf("\na lista esta em ordem crescente.");break;
+                    }
+                }
+            }
+            case 9://limpar lista
             {
                 if(k==1)
                 {
@@ -494,7 +479,7 @@ int main()
                 }
                 break;
             }
-            case 8:
+            case 10://mudar de lista
             {
                 o=0;
                 break;

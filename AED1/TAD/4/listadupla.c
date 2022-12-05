@@ -23,6 +23,15 @@ Lista *criar()
     return l;
 }
 
+void mostrarAluno(AL *a)
+{
+    printf("\n\naluno buscado:");
+    printf("\naluno: %s.",a->nome);
+    printf("\nmatricula: %d.",a->mat);
+    printf("\nnota: %f.",a->nota);
+    printf("\n");
+}
+
 int cadastrarinicio(Lista *l, AL *aluno)
 {
     if(l==NULL) return -1;
@@ -70,6 +79,7 @@ int cadastrarposicao(Lista *l, AL *aluno, int pos)
     (nolista->prox)->ant = n;
     n->ant = nolista;
     nolista->prox = n;
+    n->valores = *aluno;
     (l->tam)++;
     return 0;
 }
@@ -106,7 +116,7 @@ int removerposicao(Lista *l, int pos)
 {
     int j = 1;
     if(l==NULL) return -1;
-    if(l->inicio == NULL) return 1;
+    if(l->inicio == NULL) return -3;
     if(pos>=l->tam) return removerfim(l);
     if(pos<0) return 1;
     if(pos==1) return removerinicio(l);
@@ -136,6 +146,7 @@ void mostrar(Lista *l)
         printf("\n->nome do aluno: %s.",(nolista->valores).nome);
         printf("\n->matricula do aluno: %d.",(nolista->valores).mat);
         printf("\n->nota do aluno: %f.",(nolista->valores).nota);
+        printf("\n");
         nolista = nolista->prox;
     }
 }
@@ -147,16 +158,15 @@ void limpar(Lista *l)//apagar os elementos só
         removerinicio(l);
 }
 
-AL *maiornota(Lista *l)
+int maiornota(Lista *l,AL *aluno)
 {
-    AL *aluno = (AL *)malloc(sizeof(AL));
     float m=0.0;
-    int n,j;
-    if(l == NULL) return 0;
-    if(l->inicio == NULL) return 2;
+    if(l == NULL) return -1;
+    if(l->inicio == NULL) return 1;
     no *nolista = l->inicio;
     while(nolista != NULL)
     {
+        printf("yay");
         if(((nolista->valores).nota)>m)
         {
             m=(nolista->valores).nota;
@@ -164,7 +174,20 @@ AL *maiornota(Lista *l)
         }
         nolista = nolista->prox;
     }
-    return aluno;
+    return 0;
+}
+
+int tamanho(Lista *l)
+{
+    int i=1;
+    if(l->inicio == NULL) return 0;
+    no *nolista = l->inicio;
+    while(nolista->prox != NULL)
+    {
+        nolista = nolista->prox;
+        i++;
+    }
+    return i;
 }
 
 int troca(Lista *l,int pos1, int pos2)
@@ -173,7 +196,7 @@ int troca(Lista *l,int pos1, int pos2)
     if(l==NULL) return -1;
     if(pos1>l->tam) pos1 = l->tam;
     if(pos2>l->tam) pos2 = l->tam;
-    if(l->inicio==NULL) return 1;
+    if(l->inicio==NULL) return -3;
     if(pos1<0||pos2<0) return 1;
     AL *aluno1 = (AL *)malloc(sizeof(AL));
     AL *aluno2 = (AL *)malloc(sizeof(AL));
@@ -226,7 +249,7 @@ int ordemmat(Lista *l)
 
 int semelhanca(Lista *l, Lista *k)
 {
-    int j = 0;
+    int j = 0,j1;
     if((l == NULL)||(k == NULL)) return -1;
     if((l->inicio == NULL)&&(k->inicio == NULL)) return 0;
     if(l->tam != k->tam) return 1;//se nao tiverem o mesmo tamanho, já nao têm os mesmos elementos
@@ -234,12 +257,14 @@ int semelhanca(Lista *l, Lista *k)
     no *nolistak = k->inicio;
     while(nolistal!=NULL)
     {
+        j1=j;
         while(nolistak!=NULL)
         {
             if((nolistal->valores).mat == (nolistak->valores).mat)
                 j++;
             nolistak = nolistak->prox;
         }
+        if(j-j1>1) return 1;
         nolistak = k->inicio;
         nolistal = nolistal->prox;
     }

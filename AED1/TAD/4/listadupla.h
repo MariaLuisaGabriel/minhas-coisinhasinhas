@@ -28,12 +28,18 @@ void mostrar(Lista *l);
 
 void limpar(Lista *l);
 
-AL *maiornota(Lista *l);
+int maiornota(Lista *l,AL *aluno);
 
 int troca(Lista *l,int pos1, int pos2);
 
 int ordemmat(Lista *l);
 
 int semelhanca(Lista *l, Lista *k);
+
+void mostrarAluno(AL *a);
+
+int buscarPosicao(Lista *l,int pos,AL *retorno);
+
+int tamanho(Lista *l);
 
 #endif
