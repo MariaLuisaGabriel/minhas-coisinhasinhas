@@ -93,6 +93,67 @@ convgrayI(L,N,R1,R):-
     N1 is N-3,
     convgrayI(L2,N1,R2,R).
 
+%questao 3: converta um numero recebido em uma lista com seus fatores primos.
+%ex: recebe 12, retorna [2,2,3].
+
+inserefim(X,[],[X]):-!.
+inserefim(X,[H|L],[H|R]):-
+    inserefim(X,L,R).
+
+tira([H|L],H,L).
+
+entre(A, B, A) :- A =< B.
+entre(A, B, C) :- A < B, A1 is A+1,
+entre(A1, B, C).
+
+raiz(N, R) :- N >= 0, entre(0, N, S),
+S*S =< N, (S+1)*(S+1) > N,
+R is S,!.
+
+%devolve false = numero composto; devolve true = numero primo.
+divisivel([],_):-!.
+divisivel([H|L],R):-
+    R mod H =\= 0,
+    divisivel(L,R).
+
+%primos possiveis de dividir um numero qualquer: qualquer numero primo anterior ou igual à raiz desse numero
+primos(2,[2]):-!.
+primos(3,[3]):-!.
+primos(N,L):- raiz(N,R),R1 is R+1,primos([2],R1,3,L),!.
+primos(L,R,R1,L):-R1=:=R+1,!.
+primos(L1,R,R1,L):-
+    divisivel(L1,R1),
+    inserefim(R1,L1,L2),
+    R2 is R1+1,
+    primos(L2,R,R2,L).
+primos(L1,R,R1,L):-
+    not(divisivel(L1,R1)),
+    R2 is R1+1,
+    primos(L1,R,R2,L).
+
+fatora(N,[N]):-
+N>3,
+primos(N,L),
+divisivel(L,N),!.
+
+fatora(1,[1]):-!.
+fatora(N,L):- primos(N,L1), fatora(N,L1,[],L),!.
+fatora(1,_,L,L):-!.
+fatora(N,[],L2,L):-
+    N1 is N/N,
+    inserefim(N,L2,L3),
+    fatora(N1,[],L3,L).
+fatora(N,L1,L2,L):-
+    tira(L1,H,_),
+    N mod H =:= 0,
+    N1 is N/H,
+    inserefim(H,L2,L4),
+    fatora(N1,L1,L4,L).
+fatora(N,L1,L2,L):-
+    tira(L1,H,L3),
+    N mod H =\= 0,
+    fatora(N,L3,L2,L).
+
 %questao 4: converta uma lista de 2 bits p/ decimal e depois p/ alfabeto(ou seja, 2 retornos).
 
 alf(0,a).
@@ -116,10 +177,9 @@ pares(H,N,[H1|L3],R1,R):-
 %questao 6: receba uma lista e a divida numa lista so de pares e uma so de impares.(2 retornos)
 
 pi(L,P,I):-inverte(L,L1),par(L1,P),impar(L1,I),!.
+
 par(L,P):-par(L,[],P).
-impar(L,I):-impar(L,[],I).
 par([],P,P):-!.
-impar([],I,I):-!.
 par([H|L1],P1,P):-
     H mod 2 =:= 0,
     insere(H,P1,P2),
@@ -127,6 +187,9 @@ par([H|L1],P1,P):-
 par([H|L1],P1,P):-
     H mod 2 =\= 0,
     par(L1,P1,P).
+
+impar(L,I):-impar(L,[],I).
+impar([],I,I):-!.
 impar([H|L1],I1,I):-
     H mod 2 =\= 0,
     insere(H,I1,I2),
@@ -134,6 +197,28 @@ impar([H|L1],I1,I):-
 impar([H|L1],I1,I):-
     H mod 2 =:= 0,
     impar(L1,I1,I).
+
+%questao 7:mmc de dois numeros.
+%sabemos, pelo que vimos em MCC, que MDC(a,b).MMC(a,b) = a.b. e podemos usar isso nessa questão.(resultados somente inteiros)
+
+mmc(A,B,R):-
+    mdc(A,B,R1),
+    R is (A*B)/R1.
+
+%questao 8:mdc de dois numeros.
+%existe uma propriedade em MCC antes citada, onde, MDC(a,b)=MDC(b,r), onde a = b.Q + r (r é o resto da divisao), e assim sucessivamente
+
+mdc(A,0,A):-!.
+
+mdc(A,B,R):-
+B>0,
+A1 is A mod B,
+mdc(B,A1,R),!.
+
+mdc(A,B,R):-
+B<0,
+B1 is B*(-1),
+mdc(A,B1,R).
 
 %questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.
 %pseudo-aleatoriedade, fórmula: Xn+1 = (aXn+c) mod m.
