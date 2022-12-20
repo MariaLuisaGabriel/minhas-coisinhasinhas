@@ -1,11 +1,19 @@
 %meu simuladinho para a prova 1
 %questao 1:converta uma lista em binário para uma lista em octal.
 
+%DE CAUDA
 tam(L,N):-tam(L,0,N).
 tam([],R,R):-!.
 tam([X|Y],N,R):-
 N1 is N+1,
 tam(Y,N1,R).
+
+/*SEM CAUDA
+tam([],0).
+tam([X|Y],R):-
+tam(Y,R1),
+R is R1+1.
+*/
 
 insere(X,[],[X]):-!.
 insere(X,[Y|Z],[X|[Y|Z]]).

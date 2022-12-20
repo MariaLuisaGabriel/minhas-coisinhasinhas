@@ -166,10 +166,9 @@ int maiornota(Lista *l,AL *aluno)
     no *nolista = l->inicio;
     while(nolista != NULL)
     {
-        printf("yay");
-        if(((nolista->valores).nota)>m)
+        if(nolista->valores.nota>m)
         {
-            m=(nolista->valores).nota;
+            m=nolista->valores.nota;
             *aluno = nolista->valores;
         }
         nolista = nolista->prox;

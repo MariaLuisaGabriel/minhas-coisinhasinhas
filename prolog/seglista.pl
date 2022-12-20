@@ -240,3 +240,32 @@ fila([H|T], H1, N, [N|X]):-
 fila([H|T], H, N, X):-
   N1 is N+1,
   fila(T, H, N1, X).
+
+%aula dia 19/12
+/*
+lendo info : read(X); vc recebe alguma coisa e é guardado em X
+escrevendo coisa : write(X); vc escreve oq tá guardado em X
+*/
+
+%exemplo:
+cubo:-
+read(X),processa_cubo(X).
+processa_cubo(end_of_file):-!.
+processa_cubo(N):-
+  Y is N*N*N,
+  write(Y),
+  nl,
+  cubo.
+%chama a funçao para pedir um novo X
+%digitar no input do read no vscode: numero q ce quer + . (ex: 5.)
+%digitar end of file: EOF.
+
+/*
+outros streams para entrada e saída de dados:
+->see(X). : X é o novo stream de entrada
+->seen. : fecha o stream de entrada
+->tell(X). : X é o novo stream de saída
+->told. : fecha o stream de saída
+*/
+
+%OBS: DEPOIS ESTUDAR ESSA AULA, NOS SLIDES.

@@ -1,11 +1,11 @@
 #include "listadupla.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+//LISTAS CIRCULARES
 int main()
 {
     int pA=0,pB=0,pos,j,r,z,k,o=0,n0=0,n1=0,A;
-    AL it,retorno;
+    AL it,*retorno;
     Lista *a,*b;
     while(1)
     {
@@ -317,14 +317,13 @@ int main()
             }
             case 5://maior nota da lista
             {
-                printf("help me ;-;");
                 if(k==1) 
                 {
-                    r = maiornota(a,&retorno);
+                    r = maiornota(a,retorno);
                 }
                 else
                 {
-                    r = maiornota(b,&retorno);
+                    r = maiornota(b,retorno);
                 }
                 switch(r)
                 {
@@ -347,7 +346,7 @@ int main()
                     case 0:
                     {
                         puts("o aluno com maior nota da lista é:");
-                        mostrarAluno(&retorno);
+                        mostrarAluno(retorno);
                         break;
                     }
                 }
