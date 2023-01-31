@@ -1,5 +1,5 @@
 %meu simuladinho para a prova 1
-%questao 1:converta uma lista em binário para uma lista em octal.
+/*questao 1:converta uma lista em binário para uma lista em octal.*/
 
 %DE CAUDA
 tam(L,N):-tam(L,0,N).
@@ -70,7 +70,7 @@ octal(L1,R1,R2),
 N1 is N-3,
 converte(L3,N1,R2,R).
 
-%questao 2: converta de binario para gray, de 3 em 3 bits
+/*questao 2: converta de binario para gray, de 3 em 3 bits*/
 
 inseremult([H|[H1|[H2]]],L,R):-%inserçao de 3 elementos diretão
     insere(H2,L,L1),
@@ -101,7 +101,7 @@ convgrayI(L,N,R1,R):-
     N1 is N-3,
     convgrayI(L2,N1,R2,R).
 
-%questao 3: converta um numero recebido em uma lista com seus fatores primos.
+/*questao 3: converta um numero recebido em uma lista com seus fatores primos*/
 %ex: recebe 12, retorna [2,2,3].
 
 inserefim(X,[],[X]):-!.
@@ -162,7 +162,7 @@ fatora(N,L1,L2,L):-
     N mod H =\= 0,
     fatora(N,L3,L2,L).
 
-%questao 4: converta uma lista de 2 bits p/ decimal e depois p/ alfabeto(ou seja, 2 retornos).
+/*questao 4: converta uma lista de 2 bits p/ decimal e depois p/ alfabeto(ou seja, 2 retornos).*/
 
 alf(0,a).
 alf(1,b).
@@ -172,7 +172,7 @@ ba(L,N,A):-
 decimal(L,1,N),
 alf(N,A).
 
-%questao 5: receba uma lista e devolva outra que é resultado da soma de pares da lista dada.
+/*questao 5: receba uma lista e devolva outra que é resultado da soma de pares da lista dada.*/
 
 pares(L,R):-tam(L,N),inverte(L,L1),separa(L1,1,H,L2),pares(H,N,L2,[],R).
 pares(_,1,[],R,R):-!.
@@ -182,7 +182,7 @@ pares(H,N,[H1|L3],R1,R):-
     N1 is N-1,
     pares(H1,N1,L3,R2,R).
 
-%questao 6: receba uma lista e a divida numa lista so de pares e uma so de impares.(2 retornos)
+/*questao 6: receba uma lista e a divida numa lista so de pares e uma so de impares.(2 retornos)*/
 
 pi(L,P,I):-inverte(L,L1),par(L1,P),impar(L1,I),!.
 
@@ -206,14 +206,14 @@ impar([H|L1],I1,I):-
     H mod 2 =:= 0,
     impar(L1,I1,I).
 
-%questao 7:mmc de dois numeros.
+/*questao 7:mmc de dois numeros.*/
 %sabemos, pelo que vimos em MCC, que MDC(a,b).MMC(a,b) = a.b. e podemos usar isso nessa questão.(resultados somente inteiros)
 
 mmc(A,B,R):-
     mdc(A,B,R1),
     R is (A*B)/R1.
 
-%questao 8:mdc de dois numeros.
+/*questao 8:mdc de dois numeros.*/
 %existe uma propriedade em MCC antes citada, onde, MDC(a,b)=MDC(b,r), onde a = b.Q + r (r é o resto da divisao), e assim sucessivamente
 
 mdc(A,0,A):-!.
@@ -228,7 +228,7 @@ B<0,
 B1 is B*(-1),
 mdc(A,B1,R).
 
-%questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.
+/*questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.*/
 %pseudo-aleatoriedade, fórmula: Xn+1 = (aXn+c) mod m.
 %para essa questão, c=0(crescendo) e a=1234, Xn=1(crescendo). (padrões)
 

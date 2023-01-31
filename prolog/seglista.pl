@@ -153,6 +153,8 @@ F1 is F+1,
 T1 is T + H//K,
 taylor(X,N1,F1,T1,R).
 
+/*FUNÇÕES DAQUELAS QUESTAO MT DOIDA DO PROF*/
+
 %decimal -> "binario".
 
 par(X):- (X mod 2) =:= 0.
@@ -269,3 +271,117 @@ outros streams para entrada e saída de dados:
 */
 
 %OBS: DEPOIS ESTUDAR ESSA AULA, NOS SLIDES.
+
+%pratica dia 20/01
+
+inicio :- 
+  	repeat,
+	hipotetiza(Animal),
+	write('O animal eh: '),
+	write(Animal),
+	nl,
+	removeRespostas,
+  write('quer que o programa continue adivinhando?'),
+  read(X),
+  (X == s -> fail;!).
+
+/* hipoteses a serem testadas*/
+hipotetiza(leopardo) :- leopardo, !.
+hipotetiza(tigre) :- tigre, !.
+hipotetiza(girafa) :- girafa, !.
+hipotetiza(zebra) :- zebra, !.
+hipotetiza(avestruz) :- avestruz, !.
+hipotetiza(pinguim) :- pinguim, !.
+hipotetiza(albatroz) :- albatroz, !.
+hipotetiza(desconhecido). /* nao diagnosticado */
+
+/* regras de identifica��o do animal */
+leopardo :- 
+	mamifero,
+	carnivoro,
+	verifica(tem_manchas_escuras).
+tigre :- 
+	mamifero,
+	carnivoro,
+	verifica(tem_listras_pretas).
+girafa :- 
+	ungulado,
+	verifica(tem_pescoco_grande),
+	verifica(tem_pernas_grandes).
+zebra :- 
+	ungulado,
+	verifica(tem_listras_pretas).
+avestruz :- 
+	passaro,
+	verifica(nao_voa),
+	verifica(tem_pescoco_grande).
+pinguim :- 
+	passaro,
+  not(verifica(voa)),
+  not(verifica(tem_penas)),
+	verifica(nao_voa),
+	verifica(nada),
+	verifica(branco_e_preto).
+albatroz :- 
+	passaro,
+	verifica(aparece_em_estoria_de_marinheiro),
+	verifica(voa).
+
+/* regras de classifica��o */
+
+mamifero :- 
+	verifica(tem_pelo), !.
+mamifero :- 
+	verifica(amamenta).
+passaro :- 
+  not(mamifero),
+  not(ungulado),
+	verifica(tem_penas), !.
+passaro :- 
+  not(mamifero),
+  not(verifica(tem_penas)),
+  not(ungulado),
+	verifica(voa),
+	verifica(poe_ovos).
+carnivoro :- 
+	verifica(come_carne), !.
+carnivoro :- 
+	verifica(tem_dentes_pontiagudos),
+	verifica(tem_garras).
+ungulado :- 
+  not(carnivoro),
+	mamifero,
+	verifica(tem_cascos), !.
+ungulado :- 
+  not(carnivoro),
+	mamifero,
+	verifica(rumina).
+
+/* formulando perguntas */
+pergunta(Pergunta) :-
+	write('O animal tem a seguinte caracteristica: '),
+	write(Pergunta),
+	write('? '),
+	read(Resposta),
+	nl,
+	trate(Pergunta,Resposta).
+
+trate(Pergunta,Resposta) :-
+	Resposta == s,
+	assert(sim(Pergunta)),!.
+trate(Pergunta,_) :-
+	assert(nao(Pergunta)),fail.
+
+:- dynamic sim/1,nao/1.
+
+/* verificando */
+
+verifica(S) :- sim(S),!.
+verifica(S) :- nao(S),!, fail.
+verifica(S) :- pergunta(S).
+
+/* remove todas as assercoes de sim e nao */
+
+removeRespostas :- retract(sim(_)),fail.
+removeRespostas :- retract(nao(_)),fail.
+removeRespostas. %para o ultimo caso de retract (EOF), pra n dar o fail final.
