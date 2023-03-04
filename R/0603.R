@@ -4,4 +4,4 @@
 x <- seq(3,39,3)
 #sequencia em x que vai de 3 a 39, de 3 em 3
 
-#
+#a
