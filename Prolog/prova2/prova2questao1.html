@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<title>Pizzas QLoucura</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+<form method="post"
+enctype="application/x-www-form-urlencoded"
+action="http://localhost:5000/processa_pedido"
+enctype="text/plain">
+<p><label>Nome do Cliente: <input name="nomeCliente" ></label></p>
+<p><label>Telefone: <input type=tel name="telCliente"></label></p>
+<p><label>E-mail: <input type=email name="emailCliente"></label></p>
+<fieldset>
+<legend> Tamanho da Pizza </legend>
+<p><label> <input type=radio name="tamanho" value="pequena"> Pequena
+</label></p>
+<p><label> <input type=radio name="tamanho" value="media"> Média </label></p>
+<p><label> <input type=radio name="tamanho" value="grande"> Grande
+</label></p>
+</fieldset>
+<fieldset>
+<legend> Tipo da Pizza </legend>
+<p><select name="tipo">
+<option value="moda">Moda da Casa</option>
+<option value="portuguesa">Portuguesa</option>
+<option value="calabresa">Calabresa</option>
+<option value="baconmilho">Bacon e Milho</option>
+<option value="mozarella">Mozarella</option>
+<option value="margherita">Margherita</option>
+</select>
+</fieldset>
+<fieldset>
+<legend> Ingrediente </legend>
+<p><label> <input type=checkbox name="ing" value="tomate" checked> Tomate
+</label></p>
+<p><label> <input type=checkbox name="ing" value="presunto" checked>
+Presunto</label></p>
+<p><label> <input type=checkbox name="ing" value="cebola" checked> Cebola
+</label></p>
+<p><label> <input type=checkbox name="ing" value="queijo" checked> Queijo
+</label></p>
+</fieldset>
+<fieldset>
+<legend> Entrega </legend>
+<p><label>Horário de entrega desejado: <input type=time min="11:00"
+max="21:00"
+step="900" name="tempo"></label></p>
+<p><label>Instruções para entrega: <textarea name="obs" rows="2"
+cols="30"></textarea></label></p>
+</fieldset>
+<fieldset>
+<input type="submit" value="Enviar Pedido">
+<p>
+<input type="reset" value="Apagar Campos">
+</fieldset>
+</form>
+</body>
+</html>
