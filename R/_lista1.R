@@ -141,3 +141,41 @@ num.impar = function(v) {
   }
   return(contador)
 }
+
+#9
+dado1 <- 0
+dado1 <- 0
+s2<-0
+resultados<-c()
+for(j in 1:1000)
+{
+  dado1 <- sample(1:6,1)
+  dado2 <- sample(1:6,1)
+  s<-dado1+dado2
+  s2<-s
+  if(s==7 | s==11) 
+  {
+    resultados <- c(resultados,1)
+  }else{
+  if(s==2 | s==3 | s==12)
+  {
+    resultados <- c(resultados,0)
+  }else
+  {
+    dado1 <- sample(1:6,1)
+    dado2 <- sample(1:6,1)
+    s<-dado1+dado2
+    while(s!=7 && s!=s2)
+    {
+      dado1 <- sample(1:6,1)
+      dado2 <- sample(1:6,1)
+      s<-dado1+dado2
+    }
+    if(s==7) c(resultados,0)
+    if(s==s2) c(resultados,1)
+  }
+  }
+}
+mean(resultados)
+
+#10
