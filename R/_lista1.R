@@ -78,3 +78,66 @@ resposta_e<-length(which(xVec%%2==0))
 pedaco_yVec<-yVec[seq(1,250,3)]
 
 #5
+fibs <- c(1,1)
+fibonacci = function(x){
+  for(j in 3:x)
+  {
+    fibs<-c(fibs,(fibs[j-1]+fibs[j-2]))
+  }
+  return(fibs)
+}
+
+#6
+#coelhos gerando filhotes, com cada um gerando k pares:
+#(1)par1 - filhotes
+#(1)par1 - adulto
+#(1 + k)[k pares de filhotes],[1 par adulto]
+#(k+1 + 1*k)[k+1 pares de adultos],[k pares de filhotes]
+#(2k+1 + (k+1)*k)[2k+1 pares de adultos],[(k+1)*k pares de filhotes]
+#(2k+1+(k+1)*k + (2k+1)*k)[2k+1+(k+1*k) pares de adultos],[(2k+1)*k pares de filhotes]
+#
+#F(n) = F(n-1)+F(n-2)*k => FÓRMULA GERAL!!!!
+
+fibs_geral<-c(1,1)
+fibonacci_geral = function(n,k){
+  for(j in 3:n)
+  {
+    fibs<-c(fibs,(fibs[j-1]+(fibs[j-2])*k))
+  }
+  return(fibs[n])
+}
+
+#7
+pessoas<-c(1,2,3,4)
+resultado<-c()
+for(j in 1:100000){
+  i<-1
+  sorteio<-sample(1:4,4)
+  while(i<4){
+    if(pessoas[i]==sorteio[i]){
+      resultado<-c(resultado,0)
+      break
+    }
+    i<-i+1
+  }
+  if(length(resultado)<j){
+    resultado<-c(resultado,1)
+  }
+}
+mean(resultado)
+#45% das vezes o jogo dá certo, e 55% das vezes dá errado;
+#proporção 9:11 (de 20 vezes, 11 dão errado e 9 dão certo)
+
+#8
+v <- c()
+num.impar = function(v) {
+  v<-scan()
+  x<-length(v)
+  contador<-0
+  for(j in 1:x){
+    if(v[j]%%2==1){
+      contador<-contador+1
+    }
+  }
+  return(contador)
+}
