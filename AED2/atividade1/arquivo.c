@@ -51,6 +51,7 @@ int fat(int n)
         }
         N[i]=fat;
     }
-    if(n>1) pos = n;
+    if(n>1 && n<=49) pos = n;
+    if(n>49) pos = 49;
     return N[n];
 }
