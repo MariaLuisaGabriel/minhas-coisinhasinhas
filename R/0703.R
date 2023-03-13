@@ -35,15 +35,17 @@ sum(murders$total)
 
 murders$rate <- murders$total*100000/murders$population
 
-#2º:ordenar a coluna de mortes por habitante com a função order, que ordena os valores numericos em ordem crescente (menor na primeira pociçao e maior na ultima), e retorna a posiçao original do valor que voce apontar na nova lista ordenada
+#2º:ordenar a coluna de mortes por habitante com a função order, que ordena os valores numericos em ordem crescente (menor na primeira pociçao e maior na ultima),
+#e retorna a posiçao original do valor que voce apontar na nova lista ordenada
 #ex:7 8 9 4 3
 #   1 2 3 4 5 : posiçao
 #order(7 8 9 4 3): resulta em: 3 4 7 8 9 , logo order(7 8 9 4 3)[3] = 1 (posiçao original do elemento 7)
 #                              5 4 1 2 3 : posiçao original
 #                              1 2 3 4 5 : posiçao do vetor ordenado
 
+murders$rate<-round(murders$rate,digits = 2)
 #estado com a menor taxa de mortes:
 murders$state[order(murders$rate)[1]]
 
-#estado
+#estado com a maior taxa de mortes:
 murders$state[order(murders$rate)[length(murders$rate)]]

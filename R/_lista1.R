@@ -130,7 +130,7 @@ mean(resultado)
 
 #8
 v <- c()
-num.impar = function(v) {
+num.impar = function() {
   v<-scan()
   x<-length(v)
   contador<-0
@@ -147,7 +147,7 @@ dado1 <- 0
 dado1 <- 0
 s2<-0
 resultados<-c()
-for(j in 1:1000)
+for(j in 1:100000)
 {
   dado1 <- sample(1:6,1)
   dado2 <- sample(1:6,1)
@@ -171,11 +171,55 @@ for(j in 1:1000)
       dado2 <- sample(1:6,1)
       s<-dado1+dado2
     }
-    if(s==7) c(resultados,0)
-    if(s==s2) c(resultados,1)
+    if(s==7) resultados<-c(resultados,0)
+    if(s==s2) resultados<-c(resultados,1)
   }
   }
 }
 mean(resultados)
 
 #10
+#a) 
+luke=function(L)
+{
+  while(L!=20 && L!=0)
+  {
+    moeda<-sample(0:1,1)
+    if(moeda==0) #0=coroa
+    {
+      L<-L-1
+    }else L<-L+1
+  }
+  if(L==20) return(1)
+  else return(0)
+}
+
+#b) 
+moeda<-0
+resultados<-c()
+luke2=function(L1)
+{
+  for(j in 1:100)
+  {
+    L<-L1
+    while(L!=20 && L!=0)
+    {
+      moeda<-sample(0:1,1)
+      if(moeda==0) #0=coroa
+      {
+        L<-L-1
+      }else L<-L+1
+    }
+    if(L==20) resultados<-c(resultados,1)
+    if(L==0) resultados<-c(resultados,0)
+  }
+  return(mean(resultados))
+}
+
+#c)
+socorro<-c()
+for(j in 1:19)
+{
+  socorro[j]<-luke2(j)
+}
+plot(x = 1:19,y=socorro,type='l')
