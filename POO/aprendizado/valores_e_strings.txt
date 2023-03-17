@@ -1,0 +1,33 @@
+7/3 // Evaluates to 2 (int)
+7/3.0f // Evaluates to 2.333333f (float)
+7/0 // Throws an ArithmeticException
+7/0.0 // Evaluates to positive infinity
+0.0/0.0 // Evaluates to NaN
+
+"Quotient: " + 7/3.0f => "Quotient: 2.3333333" (concatenação de strings)
+
+** && e || => não avaliam todos os seus operandos, quando nao precisa
+** & e | => avaliam todos os seus operandos, mesmo que nao precise
+
+** ~ => bitwise complement (inverte binariamente um valor)
+ex: ~12 = ~00001100, que é 11110011 (-13)
+
+Statement     Purpose              Syntax
+expression    side effects         variable = expr ; expr ++; method (); new Type ( );
+compound      group statements     { statements }
+empty         do nothing           ;
+labeled       name a statement     label : statement
+variable      declare a variable   [final] type name [= value ] [, name [= value ]] …;
+if            conditional          if ( expr ) statement [ else statement ]
+switch        conditional          switch ( expr ) { [ case expr : statements ] … [default: statements ] }
+while         loop                 while ( expr ) statement
+do            loop                 do statement while ( expr );
+for           simplified loop      for ( init ; test ; increment ) statement
+foreach       collection iteration for ( variable : iterable ) statement
+break         exit block           break [ label ] ;
+continue      restart loop         continue [ label ] ;
+return        end method           return [ expr ] ;
+synchronized  critical section     synchronized ( expr ) { statements }
+throw         throw exception      throw expr ;
+try           handle exception     try { statements } [ catch ( type name ) {statements } ] … [ finally { statements } ]
+assert        verify invariant     assert invariant [ error ];

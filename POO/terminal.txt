@@ -1,0 +1,6 @@
+javac HelloWorld.java
+
+java -cp "C:\Users\maria luisa\OneDrive\Documentos\dev\gbc035_t1_maria.luisa.gabriel.domingues\LAB01-Respostas\ex01" HelloWorld           
+Hello world!
+nome: Maria Luisa Gabriel Domingues;
+matricula: 12121BCC010
