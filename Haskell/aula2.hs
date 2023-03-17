@@ -92,3 +92,13 @@ opcao a b c | c == 1 = a + b
             | c == 3 = a * b
             | c == 4 = divisao a b
             | otherwise = -1
+
+menu2 :: IO()
+menu2 = do putStr("escreva o numero 1: ")
+           a<-readLn
+           putStr("escreva o numero 2: ")
+           b<-readLn
+           putStr("escreva um comando do tipo:\n1:a+b\n2:a-b\n3:axb\n4:a/b\n->")
+           c<-readLn 
+           putStr("resposta: ")
+           print(menu a b c)
