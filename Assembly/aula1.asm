@@ -29,3 +29,5 @@
    
     addi $v0, $0, 10
     syscall     
+
+#nao precisa compilar! somente rodar.

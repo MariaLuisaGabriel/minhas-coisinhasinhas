@@ -30,6 +30,7 @@ barplot(table(titanic$Sex),ylim = c(0,600),names.arg = c("muie","home"),col = c(
 
 table(titanic$Survived,titanic$Sex)
 #tabela que faz fatores interagirem
+#precisa usar fatores para fazer a tabela, pois a tabela será dividida baseada nos niveis do fator
 
 barplot(table(titanic$Survived,titanic$Sex),ylim = c(0,900),xlim = c(0,3),col = c("#7570b3","#8da0cb"),legend = TRUE, legend.text = c("morreu","sobreviveu"), args.legend = list(bty = "n",x = "top",cex = 1))
 #barplot com barras pintadas de uma cor onde as quantidades coincidem, e de outra cor onde uma excede a outra
