@@ -61,13 +61,30 @@ mes_sofrimento a = if a==1 then "Janeiro" else if a==2
 -- •Escaleno: as medidas dos lados são todas diferentes.
 -- •Se um triângulo não é equilátero nem escaleno, ele é isósceles.
 
-triangulo :: Int -> Int -> Int -> String
-triangulo a b c | a > b+c = "Erro!"
-                | b > a+c = "Erro!"
-                | c > b+c = "Erro!"
+triangulo :: Int -> Int -> Int -> IO()
+triangulo a b c | a > b+c = putStrLn "Erro!"
+                | b > a+c = putStrLn "Erro!"
+                | c > b+c = putStrLn "Erro!"
                 |otherwise = verifica a b c
 
-verifica :: Int -> Int -> Int -> String
-verifica a b c | a==b && b==c = "Equilatero"
-               | a/=b && b/=c && a/=c = "Escaleno"
-               | otherwise = "Isosceles"
+verifica :: Int -> Int -> Int -> IO()
+verifica a b c | a==b && b==c = putStrLn "Equilatero"
+               | a/=b && b/=c && a/=c = putStrLn "Escaleno"
+               | otherwise = putStrLn "Isosceles"
+
+--4:Escreva uma função que receba dois argumentos e retorne o maior entre a soma dos quadrados dos argumentos e o quadrado da soma dos argumentos. Use a definição local let.
+
+quad :: Int -> Int -> Int
+quad a b  | (let c = a+b in c^2) > (a^2+b^2) = (let c = a+b in c^2)
+          | otherwise = a^2+b^2
+
+--5:Faça  um  menu  que  cadastre  o  nome,  número  de  matrícula  e  nota  de  um  aluno,  e imprima esses valores em uma frase de apenas uma linha.
+
+aluno ::IO()
+aluno = do putStr("escreva o nome: ")
+           a<-getLine
+           putStr("escreva a matricula: ")
+           b<-getLine
+           putStr("escreva a nota: ")
+           c<-getLine
+           putStrLn("nome: " ++ a ++ ", matricula: "++b++", nota: "++c)

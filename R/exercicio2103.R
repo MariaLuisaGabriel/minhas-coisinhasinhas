@@ -7,22 +7,20 @@ n<-round(nrow(olive)*0.8)
 treino<-olive[1:n,]
 treino2<-olive[(n+1):nrow(olive),]
 
-treino$palmitic = as.factor(treino$palmitic)
-treino$linoleic = as.factor(treino$linoleic)
-
 sardinia<-olive[olive$region == "Sardinia",]
 south<-olive[olive$region == "Southern Italy",]
 north<-olive[olive$region == "Northern Italy",]
 
-boxplot(sardinia$oleic,south$oleic,north$oleic)
+boxplot(sardinia$linoleic,south$linoleic,north$linoleic)$stats
+boxplot(sardinia$eicosenoic,south$eicosenoic,north$eicosenoic)
 #azeite > 0.1 de acido eicosenoico = South Italy
 
 par(mfrow = c(1,2))
-hist(sardinia$oleic)
-hist(north$oleic)
+hist(sardinia$linoleic)
+hist(north$linoleic)
 
-#azeite < 74 de acido oleico = north Italy
-#else dos dois  = sardinia
+#azeite > 10.5 de acido linoleico = sardinia
+#else tudo = north Italy
 
 previsao<-c()
 for(j in 1:nrow(treino2))
@@ -32,14 +30,15 @@ for(j in 1:nrow(treino2))
     previsao[j] <- "Southern Italy"
   }else
   {
-    if(treino2$oleic[j]<74)
+    if(treino2$linoleic[j]>10.5)
     {
-      previsao[j]<- "North Italy"
+      previsao[j] <- "Sardinia"
     }else
     {
-      previsao[j]<- "Sardinia"
+      previsao[j] <- "Northern Italy"
     }
   }
 }
 
 mean(previsao == treino2$region)
+#100% de previsão certa

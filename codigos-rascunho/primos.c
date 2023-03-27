@@ -1,78 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *Primos(int *tam,int raizint);
-int aproxraiz(int y);
-int verificaprimo(int y, int *v, int t);
+int particao (int vet[], int esq, int dir){
+    int i, j, pivo, temp ;
+    pivo = vet[(esq + dir) / 2];
+    i = esq - 1;
+    j = dir + 1;
+    while (i < j) {
+        do{ i++;} while (vet[i] < pivo);
+        do{ j--;} while (vet[j] > pivo);
+        if (i < j) 
+        {
+            temp = vet[i];
+            vet[i] = vet[j];
+            vet[j] = temp;
+        }
+    }
+    return (j);
+}
+
+void q_sort (int vetor[], int esq, int dir) 
+    {   
+        int meio;
+        if (esq < dir) 
+        {
+            meio = particao (vetor, esq, dir);
+            q_sort (vetor, esq, meio);
+            q_sort (vetor, meio + 1, dir);
+        }
+}
+
+void quicksort (int vetor[], int n) 
+{
+    q_sort (vetor, 0, n-1);
+}
 
 int main()
 {
-    int t=1,y,z,v;
-    printf("escreva um numero inteiro positivo, para determinarmos todos os primos antes dele, até 2.\n->");
-    scanf("%d",&y);
-    z = aproxraiz(y);
-    int *r = Primos(&t,z);
-    v = verificaprimo(y,r,t);
-    if(r==NULL) printf("\nVETOR NAO ALOCADO.");
-    else
+    int v[10];
+    for(int i=0; i<10; i++)
     {
-        //printf("[");
-        //for(int i = 0; i<t; i++)
-        //{
-        //    printf("%d ",r[i]);
-        //}
-        //printf("]");
-        if(v==0) printf("%d EH PRIMO!",y);
-        else printf("%d NAO EH PRIMO!",y);
+        v[i]=rand()%20;
     }
-    return 0;
-}
-
-int *Primos(int *tam,int raizint)//cria um vetor de primos até o valor da raiz inteira de y, deduzido pela funçao aproxraiz
-{
-    int cont=0;
-    int *v = (int *)malloc(sizeof(int));
-    if(v==NULL) return NULL;
-    v[0] = 2;
-    for(int i = 3; i<=raizint; i++)
+    for(int i=0; i<10; i++)
     {
-        for(int j = 0; j<*tam; j++)
-        {
-            if(i%v[j]!=0)
-                cont++;
-        }
-        if(cont==*tam)
-        {
-            (*tam)++;
-            v = (int *)realloc(v,(*tam)*sizeof(int));
-            v[(*tam)-1]=i;
-        }
-        cont=0;
+        printf("%d ",v[i]);
     }
-    return v;
-}
-
-int aproxraiz(int y)//deduz a raiz inteira aproximada(pra cima) de um numero inteiro. assim que ele encontrar um numero i que ultrapasse y quando ao quadrado, ele devolve esse valor para a main
-{
-    int i=1;
-    while(1)
+    quicksort(v,10);
+    printf("\n");
+    for(int i=0; i<10; i++)
     {
-        if((i*i)>=y)
-        {
-            return (i);
-        }
-        i++;
-    }
-}
-
-int verificaprimo(int y,int *v, int t)
-{
-    for(int i=0; i<t; i++)
-    {
-        if(y==v[i])//caso o numero y esteja na lista de primos, ele é um primo(evitar erro quando y=2)
-            return 0;
-        if(y%v[i]==0)//caso esse valor seja divisivel por algum primo antes da raiz aproximada dele próprio, isso quer dizer que ele nao é primo
-            return 1;
+        printf("%d ",v[i]);
     }
     return 0;
 }
