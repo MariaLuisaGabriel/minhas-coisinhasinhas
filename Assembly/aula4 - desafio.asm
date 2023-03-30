@@ -174,7 +174,7 @@ slt $t3, $t0, $t1 #compara se a<b, se verdade, coloca 1 no t3, caso contrario co
 slt $t4, $t1, $t2 #compara se b<c, se verdade, coloca 1 no  t4, caso contrario coloca 0
 add $t3, $t3, $t4 #soma os resultados da comparaçao e guarda em t3
 
-beq $t3, $zero, NO
+beq $t3, $zero, NO # se t3 == 0, entao quer dizer que as duas comparaçoes sao falsas, caso contrario, pelo menos uma é verdadeira 
 li $v0, 4
 la $a0, str4
 syscall
