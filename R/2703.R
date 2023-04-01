@@ -25,7 +25,7 @@ boxplot(adelie$culmen_depth_mm,chinstrap$culmen_depth_mm,gentoo$culmen_depth_mm)
 boxplot(adelie$flipper_length_mm,chinstrap$flipper_length_mm,gentoo$flipper_length_mm)
 boxplot(adelie$body_mass_g,chinstrap$body_mass_g,gentoo$body_mass_g)
 
-plot(pinguim$species,pinguim$island)
+plot(pinguim$species,pinguim$island) #ver quais especies estao em quais ilhas
 
 #gentoo = todos na ilha Biscoe
 #chinstrap = todos na ilha Dream

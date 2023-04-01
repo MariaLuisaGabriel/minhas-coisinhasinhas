@@ -39,9 +39,10 @@
 	syscall
 	
 	#imprime o resultado
-	addi $v0, $zero, 1
+	addi $v0, $zero, 1 
 	add $a0, $zero, $s2
 	syscall
 	
+	#return 0
 	addi $v0, $zero, 10
 	syscall

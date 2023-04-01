@@ -8,7 +8,7 @@ str1: .asciiz " Hello World!" #variável que usa ASCII
 .text
 #teste para entrada de dados
 
-li $v0, 5 #5 = leitura de dados, o dado capturado vai pro v0 (especificação em help)
+li $v0, 5 #5 = leitura de dados inteiros, o dado capturado vai pro v0 (especificação em help)
 syscall
 add $a0, $v0, $zero #passar o dado pro a0, a partir do v0 (resultado da leitura vai pro v0)
 
