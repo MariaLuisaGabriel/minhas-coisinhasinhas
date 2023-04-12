@@ -196,7 +196,7 @@ int main()
     float tempo;
     int v1[N[0]], v2[N[1]], v3[N[2]];
     int *v;
-    for (int j = 0; j < 1; j++)
+    for (int j = 0; j < 3; j++)
     {
         switch (j)
         {
@@ -243,16 +243,13 @@ int main()
                 printf("\n=>merge: ");
                 break;
             case 6:
-                stoogesort(v, 0, N[j]);
+                stoogesort(v, 0, N[j]-1);
                 printf("\n=>stooge: ");
                 break;
             }
             clock_t end_time = clock();
             tempo = ((float)end_time - start_time) / CLOCKS_PER_SEC;
             printf("tempo: %f",tempo);
-            printf("\n\n");
-            for(int o=0;o < N[j];o++)
-                printf("%d ", v[o]);
             printf("\n\n");
         }
     }

@@ -77,7 +77,13 @@ mortes_cvd_spring_2000 <- sum(spring_2000$cvd)
 
 #c) preguiça
 
-#d)???
+#d)
+resp.winter <- sum(winter$resp)
+resp.summer <- sum(summer$resp)
+resp.spring <- sum(spring$resp)
+resp.autumn <- sum(autumn$resp)
+mortes.resp <- c(resp.autumn,resp.winter,resp.spring,resp.summer)
+barplot(mortes.resp, ylim = c(1,4200), xlab = "estações", ylab = "mortes por doença respiratoria", names.arg = c("outono","inverno","primavera","verão"))
 
 #e) 
 

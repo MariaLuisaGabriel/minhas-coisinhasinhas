@@ -1,38 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int particao (int vet[], int esq, int dir){
-    int i, j, pivo, temp ;
-    pivo = vet[(esq + dir) / 2];
-    i = esq - 1;
-    j = dir + 1;
-    while (i < j) {
-        do{ i++;} while (vet[i] < pivo);
-        do{ j--;} while (vet[j] > pivo);
-        if (i < j) 
-        {
-            temp = vet[i];
-            vet[i] = vet[j];
-            vet[j] = temp;
-        }
+/*ABC-SORT(A, i, j)
+1   if A[i] > A[j]
+2 then trocar A[i] e A[j]
+3   if i + 1 >= j
+4 then return
+5   k (j-i+1)/3   // divisão inteira (arredondar para baixo)
+6   ABC-SORT(A, i, j-k)
+7   ABC-SORT(A, i+k, j)
+8   ABC-SORT(A, i, j-k)*/
+
+void ABCsort(int *a, int i, int j){
+    int temp;
+    if(a[i]>a[j])
+    {
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
-    return (j);
-}
-
-void q_sort (int vetor[], int esq, int dir) 
-    {   
-        int meio;
-        if (esq < dir) 
-        {
-            meio = particao (vetor, esq, dir);
-            q_sort (vetor, esq, meio);
-            q_sort (vetor, meio + 1, dir);
-        }
-}
-
-void quicksort (int vetor[], int n) 
-{
-    q_sort (vetor, 0, n-1);
+    if(i+1>=j) return;
+    int k = (j-i+1)/3;
+    ABCsort(a,i,j-k);
+    ABCsort(a,i+k,j);
+    ABCsort(a,i,j-k);
 }
 
 int main()
@@ -46,7 +37,7 @@ int main()
     {
         printf("%d ",v[i]);
     }
-    quicksort(v,10);
+    ABCsort(v,0,9);
     printf("\n");
     for(int i=0; i<10; i++)
     {

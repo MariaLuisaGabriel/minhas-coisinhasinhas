@@ -228,6 +228,9 @@ int parte(Prod *p, int start, int end, int a) {
   int j = end + 1;
   Prod temp;
   while (i < j) {
+    i++;//deve acontecer pelo menos uma vez, para poder ocorrer a análise de elementos iguais
+    j--;//mesmo motivo do de cima
+    //além do mais, um começa em -1 e o outro em mais que o limite do tamanho 
     if (a == 1) {
       while (p[i].cod < pivot) {
         i++;
@@ -237,7 +240,7 @@ int parte(Prod *p, int start, int end, int a) {
         i++;
       }
     } else {
-      while (p[i].cod < pivotF) {
+      while (p[i].valor < pivotF) {
         i++;
       }
     }
@@ -250,7 +253,7 @@ int parte(Prod *p, int start, int end, int a) {
         j--;
       }
     } else {
-      while (p[i].cod > pivotF) {
+      while (p[i].valor > pivotF) {
         j--;
       }
     }

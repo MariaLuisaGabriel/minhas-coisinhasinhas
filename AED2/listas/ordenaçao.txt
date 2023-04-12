@@ -1,0 +1,230 @@
+RESPOSTAS DAS QUESTÕES DA LISTA SOBRE ORDENAÇÃO
+(1) o menor elemento pode residir em um dos ramos da base do heap máximo
+
+(2) não
+
+(3) feito em ordenacao.c
+
+(4) complexidade de tempo, considerando Heap e Selection Sort:
+                Heap  | Selection
+melhor caso:    nlogn |  n²
+caso médio:     nlogn |  n²
+pior caso:      nlogn |  n²
+-> heapsort demora menos que o selectionSort, lembrando que nlogn < n² | n>=2
+
+(5) ordenando por ShellSort:
+[3 5 9 2 5 4 10] = a
+-> intervalo = 4
+compara a[0] com a[4] : 3>5 false
+troca a[4] com a[4]
+[3 5 9 2 5 4 10]
+compara a[1] com a[5] : 5>4 true
+troca a[1] com a[5]
+[3 4 9 2 5 5 10]
+compara a[2] com a[6] : 9>10 false
+troca a[6] com a[6]
+[3 4 9 2 5 5 10]
+-> intervalo = 1
+compara a[0] com a[1] : 3>4 false
+troca a[1] com a[1]
+[3 4 9 2 5 5 10]
+compara a[1] com a[2] : 4>9 false
+troca a[2] com a[2]
+[3 4 9 2 5 5 10]
+compara a[2] com a[3] : 9>2 true
+a[3] recebe o valor de a[2] [3 4 9 9 5 5 10]
+(compara a[3](antigo) com a[1]: 4>2 true)
+a[2] recebe o valor de a[1] [3 4 4 9 5 5 10]
+(compara a[3](antigo) com a[0]: 3>2 true)
+a[1] recebe o valor de a[0] [3 3 4 9 5 5 10]
+(fim do loop)
+a[0] recebe o valor de a[3](antigo)
+[2 3 4 9 5 5 10]
+compara a[3] com a[4] : 9>5 true
+a[4] recebe o valor de a[3] [2 3 4 9 9 5 10]
+(compara a[4](antigo) com a[2]: 4>5 false)
+a[3] recebe o valor de a[4] (antigo)
+[2 3 4 5 9 5 10]
+compara a[4] com a[5] : 9>5 true
+a[5] recebe o valor de a[4] [2 3 4 5 9 9 10]
+(compara a[5](antigo) com a[3]: 5>5 false)
+a[4] recebe o valor de a[5]
+[2 3 4 5 5 9 10]
+compara a[5] com a[6]: 9>10 false
+a[6] recebe o valor de a[6]
+[2 3 4 5 5 9 10]
+->intervalo = 0
+vetor ordenado: [2 3 4 5 5 9 10]
+
+em resumo:
+[3 5 9 2 5 4 10]
+[3 4 9 2 5 5 10]
+[3 4 9 9 5 5 10] 2
+[3 4 4 9 5 5 10] 2
+[3 3 4 9 5 5 10] 2
+[2 3 4 9 5 5 10]
+[2 3 4 9 9 5 10] 5
+[2 3 4 5 9 5 10]
+[2 3 4 5 9 9 10] 5
+[2 3 4 5 5 9 10] ordenado!
+
+(6) feito em ordenacao.c
+
+(7) feito em ordenacao.c
+
+(8) a metodologia de quicksort se resume a selecionar um pivot, ou seja, um elemento do vetor, escolhido através de um de diversos métodos existentes,
+e a separação do vetor a ordenar em: parte à esquerda do pivot, somente com elementos menores que o pivot, e a outra parte à direita, somente com elementos maiores que o pivot.
+Em cada uma das metades, de desenrola o mesmo processo, até que o tamanho do vetor a analisar seja 0. Até que isso aconteça, o vetor já estará ordenado.
+
+(9) 
+a.
+A = {12, 18, 8, 4, 11, 7, 6, 3, 10, 1, 5, 20}
+chamada da função partição (primeira vez, logo o inicio é 0 e o fim é 11)
+pivot = 12
+i = 0 (-1 + 1)
+j = 11 (12 - 1)
+compara 12 com 12, é menor? não; i permanece 0
+compara 20 com 12, é maior? sim; j agora é 10
+compara 5 com 12, é maior? não; j permanece 10
+troca posição 0 com 10
+A = {5, 18, 8, 4, 11, 7, 6, 3, 10, 1, 12, 20}
+i++
+j--
+compara 18 com 12, é menor? não; i permanece 1
+compara 1 com 12, é maior? não; j permanece 9
+troca posição 1 com 9
+A = {5, 1, 8, 4, 11, 7, 6, 3, 10, 18, 12, 20}
+i++
+j--
+compara 8 com 12, é menor? sim; i agora é 3
+compara 4 com 12, é menor? sim; i agora é 4
+compara 11 com 12, é menor? sim; i agora é 5
+compara 7 com 12, é menor? sim; i agora é 6
+compara 6 com 12, é menor? sim; i agora é 7
+compara 3 com 12, é menor? sim; i agora é 8
+compara 10 com 12, é menor? sim; i agora é 9
+compara 12 com 12, é menor? não; i permanece 9
+compara 10 com 12, é maior? não; j permanece 8
+i > j, não há trocas
+função partição retornará o valor de j, que é 9 (será considerado o meio)
+conteúdo de A após fim da função partição: A = {5, 1, 8, 4, 11, 7, 6, 3, 10, 18, 12, 20}
+
+b. o valor da posição pivot foi comparado 14 vezes.
+
+c. considerando B = {3, 3, 3, 3, 3}
+a função partição se portará:
+chamada da partição;
+pivot = 3;
+i = 0;
+j = 4;
+compara 3 com 3, é menor? não; i permanece 0
+compara 3 com 3, é maior? não; j permanece 4
+troca posição 0 com 4
+B = {3, 3, 3, 3, 3}
+compara 3 com 3, é menor? não; i permanece 1
+compara 3 com 3, é maior? não; j permanece 3
+troca posição 1 com 3
+B = {3, 3, 3, 3, 3}
+compara 3 com 3, é menor? não; i permanece 2
+compara 3 com 3, é maior? não; j permanece 2
+i = j, não há trocas
+partição retorna o valor de j = 2
+vetor no final: B = {3, 3, 3, 3, 3}
+
+10. (só fazer com que os maiores fiquem a esquerda e os menores a direita -> i compara para elementos maiores que pivot e j para menores)
+
+11.
+a.
+
+50 86 2 46 14 55 37 60 78 62
+|               \
+50 86 2 46 14   55 37 60 78 62
+|       \             |     \
+50 86    2 46 14    55 37   60 78 62
+|   \     |   \      |  \     |    \
+50  86   2 46  14   55  37  60 78   62
+|    |   |  |  |    |   |   |  |    |
+50   86  2  46 14   55  37  60 78   62
+
+b.
+
+1 2 3 4 5 6 7 8
+|         \
+1 2 3 4   5 6 7 8
+|   \     |    \
+1 2  3 4  5 6  7 8
+| |  | |  | |  | |
+1 2  3 4  5 6  7 8
+
+ordenação:
+1º : 1 2
+2º : 3 4
+3º : 1 2 3 4
+4º : 5 6
+5º : 7 8
+6º : 5 6 7 8
+7º : 1 2 3 4 5 6 7 8
+
+12.
+metodos dados em sala:
+-> bubbleSort, bucketSort, mergeSort, quickSort, shellSort, stoogeSort, heapSort, insertionSort, selectionSort
+a. algoritmos in-place (usam o espaço do vetor recebido para fazer todas as operações):
+1. bubbleSort
+2. quickSort
+3. stoogeSort
+4. heapSort
+5. insertionSort
+6. ShellSort
+7. selectionSort
+   algoritmos estáveis (não promovem alterações na ordem de registro do vetor que recebem (quando recebem numeros iguais, a ordem em que vieram permanece no vetor ordenado))
+1. bubbleSort
+2. stoogeSort
+3. insertionSort
+4. bucketSort
+5. mergeSort
+   (instáveis:)
+(selectionSort,heapSort,quickSort,shellSort)
+
+13.
+Discuta as vantagens e desvantagens de todos os algoritmos de ordenação apresentados em sala descrevendo as situações em que a utilização deles é mais adequada. Utilize também nas suas discussões a complexidade computacional de cada um. 
+
+BubbleSort:
+->vantagem: simples de implementar, in-place
+->desvantagem: desempenho da ordem O(n²) no melhor e pior caso (existem aprimoramentos com melhor desempenho)
+
+SelectionSort:
+->vantagem: simples de implementar, bom desempenho quanto ao numero de movimentos de registros, bom para arquivos com registros grandes, in-place
+->desvantagem: desempenho da ordem O(n²) no melhor e pior caso, algoritmo instável
+
+InsertionSort:
+->vantagem: simples de implementar, in-place
+->desvantagem: desempenho da ordem O(n²) no pior caso, ineviciente para conjuntos grandes de elementos
+
+ShellSort:
+->vantagem: mais eficiente que os 3 primeiros, mais simples que merge e quicksort, in-place
+->desvantagem: mais complexo que os 3 primeiros e não tao eficiente quanto merge e quicksort
+complexidade:
+melhor caso: O(nlogn)
+pior caso: O(n²)
+
+MergeSort:
+->vantagem: rápido (complexidade nlogn(base 2))
+->desvantagem: requer dobro de memória (não é in-place), complexidade nlogn pro melhor caso
+
+QuickSort:
+->vantagem: rápido (complexidade nlogn), in-place
+->desvantagem: complexo, instável
+
+HeapSort:
+->vantagem: complexidade nlogn pra todo tipo de caso, in-place, melhor que o shellsort para grandes arquivos
+->desvantagem: instável, não recomendado para arquivos pequenos, mais complexo que quicksort
+
+BucketSort:
+->vantagem: estável (exceto se usar um algoritmo instavel pros buckets), simples
+->desvantagem: dados precisam estar uniformemente distribuídos (pode explodir um bucket se ele tiver muitos elementos), não recomendado para arquivos grandes, ordena inteiros somente (mas modificável)
+complexidade:
+melhor caso: O(n+k) (k = nº de baldes)
+pior caso: O(n²) (todos os elementos no mesmo balde)
+
+14.
+método mais indicado: quicksort/mergesort/heapsort

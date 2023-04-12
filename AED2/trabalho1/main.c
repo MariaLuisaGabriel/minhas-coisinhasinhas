@@ -10,7 +10,7 @@
 int main() {
   FILE *f;
   Prod *p[5];
-  int a=1, i=0, j, op, bc;
+  int a=1, i=4, j, op=3, bc;
   float tempo, media = 0.0;
   char metodos[7][100] = {"CocktailSort",  "ShellSort", "HeapSort", "Quicksort",  "CombSort", "PancakeSort", "BucketSort"};
 
@@ -19,13 +19,14 @@ int main() {
   f = fopen("medias.txt", "w+");
   
   //for(i = 0; i<5; i++) {
+    printf("tamanho : %d",tam[i]);
     p[i] = Criar(tam[i]);
     fprintf(f, "\n\n\nPara tamanho %d\n", tam[i]);
-    for(op = 7; op < 8; op++) {
+    //for(op = 1; op < 8; op++) {
       fprintf(f, "\n\n=> %s: ", metodos[op-1]);
       //for (a = 1; a < 4; a++) {
         media = 0.0;
-        for(j = 0; j < 10; j++) {
+        //for(j = 0; j < 10; j++) {
           GeraAl(p[i], tam[i]);
           clock_t start_time = clock();
           switch(op)
@@ -68,7 +69,7 @@ int main() {
           clock_t end_time = clock();
           tempo = ((float)end_time - start_time) / CLOCKS_PER_SEC;
           media = media + tempo;
-        }
+        //}
         switch(a) {
         case 1: 
           fprintf(f, "\n-para codigo: ");
@@ -82,10 +83,12 @@ int main() {
           fprintf(f, "\n-para valor: ");
           break;
         }
+        printf("\nmetodo %s ok",metodos[op-1]);
         if (!(op == 7 && a > 1)) fprintf(f, "%f", media/10);
       //}
-    }
+    //}
   //}
   fclose(f);
+  Mostrar(p[4],tam[4]);
   return 0;
 }
