@@ -9,7 +9,7 @@
 
 # store byte: sb doador, receptor(posicao)
 #A = 65, a = 97 ( A = a - 32 )
-.include "aula7.asm"
+.include "macros.asm"
 .data
 	str1: .asciiz "escreva o tamanho da string: "
 	str2: .asciiz "\nescreva uma palavra: "
