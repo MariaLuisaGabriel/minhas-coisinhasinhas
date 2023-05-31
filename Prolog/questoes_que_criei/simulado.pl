@@ -1,4 +1,26 @@
 %meu simuladinho para a prova 1
+%ATENÇÃO: não precisa desesperar pra fazer toda essa lista KKKKKKKKKKKK
+%ela é DE PROPOSITO mais difícil que as provas, afim de ir folgado pra prova
+%se fizer pelo menos 5 questões dessa lista, considere-se foda
+%se fizer pelo menos 7 questões dessa lista, considere-se muito foda
+%se fez tudo ce é o deus do prolog
+%brincadeira KKKKKKKKKKKKKK
+
+%MAIS DETALHES DAS QUESTÕES ESTÃO NO GABARITO
+/*
+questao 1: converta uma lista em binário para uma lista em octal.
+questao 2: converta de binario para gray, de 3 em 3 bits
+questao 3: converta um numero recebido em uma lista com seus fatores primos
+questao 4: converta uma lista de 2 bits pra decimal e depois pra alfabeto(<-usar casamento de padrões) (ou seja, 2 retornos).
+questao 5: receba uma lista e devolva outra que é resultado da soma de pares consecutivos da lista dada.
+questao 6: receba uma lista e a divida numa lista so com seus pares e uma so com seus impares.(2 retornos)
+questao 7: mmc de dois numeros.
+questao 8: mdc de dois numeros.
+questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.
+*/
+
+%GABARITO:
+
 /*questao 1:converta uma lista em binário para uma lista em octal.*/
 
 %DE CAUDA
@@ -103,6 +125,11 @@ convgrayI(L,N,R1,R):-
 
 /*questao 3: converta um numero recebido em uma lista com seus fatores primos*/
 %ex: recebe 12, retorna [2,2,3].
+%ATENÇÃO: função comando dessa questão é o fatora, e não o primos (primos é auxiliar)
+
+/*
+TEOREMA DE MCC: um número qualquer N>0 é composto por primos menores ou iguais que sua própria raiz quadrada, SEMPRE.
+*/
 
 inserefim(X,[],[X]):-!.
 inserefim(X,[H|L],[H|R]):-
@@ -128,12 +155,12 @@ divisivel([H|L],R):-
 primos(2,[2]):-!.
 primos(3,[3]):-!.
 primos(N,L):- raiz(N,R),R1 is R+1,primos([2],R1,3,L),!.
-primos(L,R,R1,L):-R1=:=R+1,!.
+primos(L,R,R1,L):-R1=:=R+1,!. %a lista para de inserir pelo fato de ter passado da raíz de N (teorema comprova isso)
 primos(L1,R,R1,L):-
-    divisivel(L1,R1),
-    inserefim(R1,L1,L2),
-    R2 is R1+1,
-    primos(L2,R,R2,L).
+    divisivel(L1,R1), %verifica se o numero R1 é realmente primo (só ver se ele é ou não divisível por todos aqueles primos já inseridos na lista), se não for ele desce para a linha 137
+    inserefim(R1,L1,L2), %já que é primo, insere ele na lista de primos
+    R2 is R1+1, %vai pro próximo valor
+    primos(L2,R,R2,L). %
 primos(L1,R,R1,L):-
     not(divisivel(L1,R1)),
     R2 is R1+1,
@@ -144,8 +171,11 @@ N>3,
 primos(N,L),
 divisivel(L,N),!.
 
+%vai dividindo o número dado com cada um dos elementos da lista de primos (head por head), caso haja um divisível, ele não pula aquele primo que é fator, mas o repete (casos onde um número é fatorado por vários primos iguais)
+%caso aquele número (head da lista de primos) já não seja mais divisor do número dado, a função pula aquela cabeça e agora lida so com sua cauda
+
 fatora(1,[1]):-!.
-fatora(N,L):- primos(N,L1), fatora(N,L1,[],L),!.
+fatora(N,L):- primos(N,L1), fatora(N,L1,[],L),!. /*FUNÇÃO PRINCIPAL*/
 fatora(1,_,L,L):-!.
 fatora(N,[],L2,L):-
     N1 is N/N,
@@ -156,13 +186,13 @@ fatora(N,L1,L2,L):-
     N mod H =:= 0,
     N1 is N/H,
     inserefim(H,L2,L4),
-    fatora(N1,L1,L4,L).
+    fatora(N1,L1,L4,L),!.
 fatora(N,L1,L2,L):-
     tira(L1,H,L3),
-    N mod H =\= 0,
     fatora(N,L3,L2,L).
 
-/*questao 4: converta uma lista de 2 bits p/ decimal e depois p/ alfabeto(ou seja, 2 retornos).*/
+/*questao 4: converta uma lista de 2 bits pra decimal e depois pra alfabeto(ou seja, 2 retornos).*/
+%é pra treino de casamento de padrões
 
 alf(0,a).
 alf(1,b).
@@ -172,9 +202,10 @@ ba(L,N,A):-
 decimal(L,1,N),
 alf(N,A).
 
-/*questao 5: receba uma lista e devolva outra que é resultado da soma de pares da lista dada.*/
+/*questao 5: receba uma lista e devolva outra que é resultado da soma de pares consecutivos da lista dada.*/
+%ex: recebe [1,2,3,4] retorna [3,5,7] (3 = 1+2, 5 = 2+3, 7 = 3+4)
 
-pares(L,R):-tam(L,N),inverte(L,L1),separa(L1,1,H,L2),pares(H,N,L2,[],R).
+pares(L,R):-tam(L,N),inverte(L,L1),separa(L1,1,H,L2),pares(H,N,L2,[],R). %inverto a lista para que quando vier a resposta, ela seja organizada da forma certa (estou inserindo no inicio a cada operação)
 pares(_,1,[],R,R):-!.
 pares(H,N,[H1|L3],R1,R):-
     J is H+H1,
@@ -182,9 +213,11 @@ pares(H,N,[H1|L3],R1,R):-
     N1 is N-1,
     pares(H1,N1,L3,R2,R).
 
-/*questao 6: receba uma lista e a divida numa lista so de pares e uma so de impares.(2 retornos)*/
+/*questao 6: receba uma lista e a divida numa lista so com seus pares e uma so com seus impares.(2 retornos)*/
 
 pi(L,P,I):-inverte(L,L1),par(L1,P),impar(L1,I),!.
+
+%varre-se a lista duas vezes, uma pra juntar so os pares e outra so pros impares
 
 par(L,P):-par(L,[],P).
 par([],P,P):-!.
@@ -207,7 +240,7 @@ impar([H|L1],I1,I):-
     impar(L1,I1,I).
 
 /*questao 7:mmc de dois numeros.*/
-%sabemos, pelo que vimos em MCC, que MDC(a,b).MMC(a,b) = a.b. e podemos usar isso nessa questão.(resultados somente inteiros)
+%sabemos, pelo que vimos em MCC, que MDC(a,b).MMC(a,b) = a.b; e podemos usar isso nessa questão.(resultados somente inteiros)
 
 mmc(A,B,R):-
     mdc(A,B,R1),
@@ -229,6 +262,7 @@ B1 is B*(-1),
 mdc(A,B1,R).
 
 /*questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.*/
+%como vimos em MCC:
 %pseudo-aleatoriedade, fórmula: Xn+1 = (aXn+c) mod m.
 %para essa questão, c=0(crescendo) e a=1234, Xn=1(crescendo). (padrões)
 
