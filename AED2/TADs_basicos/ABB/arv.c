@@ -279,3 +279,12 @@ int maior(arvBin *a)
     }
     return res;
 }
+
+void niveis(arvBin *a, int *pilha, int *pos)
+{
+    if((*pos)>=100) return;
+    if(a==NULL) return;
+
+    
+    niveis(esq)
+}

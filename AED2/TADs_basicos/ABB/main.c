@@ -47,4 +47,12 @@ void main()
     printf("\nmaior: %d, menor: %d\n",getmaior(a),getmenor(a));
     mostraArvAlin(a);
     mostraArv(a);
+
+    int pilha[100];
+    printf("print em niveis de arvore binaria: ");
+    niveis(a,pilha,0);
+    for(int i = 0; i<100; i++)
+    {
+        printf("%d ",pilha[i]);
+    }
 }

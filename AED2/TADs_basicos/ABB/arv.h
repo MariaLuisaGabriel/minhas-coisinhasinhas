@@ -15,4 +15,6 @@ int getmenor(arvBin *a);
 int getmaior(arvBin *a);
 void contTAM(arvBin *a, int aux, int *res);
 int maior(arvBin *a);
+void niveis(arvBin *a, int *pilha, int *pos);
+
 #endif
