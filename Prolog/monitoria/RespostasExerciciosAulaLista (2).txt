@@ -1,0 +1,46 @@
+% exibe(L) : exibe os elementos da lista L
+exibe([]) :- nl.
+exibe([X|Y]) :- write(X),nl, exibe(Y).
+
+% membro(X,L) : o item X é membro da lista L
+membro(X,[X|_]).
+membro(X,[_|Y]) :- membro(X,Y).
+
+%anexa(A,B,C): A anexado com B dá C
+anexa([], B, B).
+anexa([X|A], B, [X|C]) :- anexa(A, B, C).
+
+%ultimo(L): retorna o último elemento de uma lista
+ultimo([X]) :- write(X).
+ultimo([_|Y]) :- ultimo(Y).
+
+% elementos consecutivos
+consecutivos(X, Y, [X, Y|_]).
+consecutivos(X, Y, [_|Calda]) :- consecutivos(X, Y, Calda).
+
+% retorna o tamanho de uma lista
+tamanho([], 0).
+tamanho([_|Calda], T) :-  tamanho(Calda, T1), T is 1 + T1.
+
+% Soma os elementos de uma lista
+soma([],0).
+soma([X|Calda], S) :- soma(Calda, S1), S is X + S1.
+
+% Determina o maior elemento de uma lista
+max([X],X).
+max([X|Calda], M):- max(Calda, M), M >= X.
+max([X|Calda], X):- max(Calda, M), X >  M.
+
+retornaElemento(N, Cabeca, [Cabeca|_]) :- N = 1.
+retornaElemento(N, Elemento, [_|Calda]) :- N1 is N - 1, 
+                                           N > 1, 
+                                           retornaElemento(N1, Elemento, Calda).
+
+retiraElemento(_, [], []).
+retiraElemento(X, [X|Calda], L) :- retiraElemento(X, Calda, L).
+retiraElemento(X, [Y|Calda], [Y|L1]) :- X \= Y,
+                                  retiraElemento(X, Calda, L1).
+
+
+insereElemento(X,[],X).
+insereElemento(X, L, [X|L]).

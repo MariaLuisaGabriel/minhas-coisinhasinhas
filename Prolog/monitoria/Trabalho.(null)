@@ -1,0 +1,270 @@
+%% Trabalho Prático, Disciplina Prolog, Integrantes: Valter Fellype Ferreira Netto, Moisés Marques de Oliveira e Gustavo Biazi
+
+%% Questão 1
+
+% Progenitores da familia progenitor(A,B) onde A é progenitor de B.
+progenitor(jose,ana).
+progenitor(jose,joao).
+progenitor(maria,ana).
+progenitor(maria,joao).
+progenitor(ana,joana).
+progenitor(ana,helena).
+progenitor(joao,mario).
+progenitor(mario,carlos).
+progenitor(helena,carlos).
+
+%Relação de gênero masculino/feminino.
+masculino(jose).
+masculino(joao).
+masculino(mario).
+masculino(carlos).
+feminino(ana).
+feminino(maria).
+feminino(joana).
+feminino(helena).
+
+%Relação de pai onde em pai(A,B), A é pai de B se A é progenitor de B e A é masculino.
+%Relação de mae onde em mae(A,B), A é mae de B se A é progenitor de B e A é feminino.
+pai(X,Y) :- 
+    progenitor(X,Y),
+    masculino(X).
+
+mae(X,Y) :-
+    progenitor(X,Y),
+    feminino(X).
+
+%Relação irmao(A,B), onde A é irmao de B se A é masculino e tem o mesmo pai e mesma mae de B.
+%Relação irma(A,B), onde A é irma de B se A é feminino e tem o mesmo pai e mesma mae de B.
+irmao(X,Y) :-
+    progenitor(Z,Y),
+    progenitor(Z,X),
+    masculino(X),
+    X\=Y.
+
+irma(X,Y) :-
+    progenitor(Z,Y),
+    progenitor(Z,X),
+    feminino(X),
+    X\=Y.
+
+%Relaçao avo(A,B), que checa se A é avo de B, se caso A seja masculino e A seja progenitor de um C e C seja progenitor de B.
+avo(X,Y) :-
+    masculino(X),
+    progenitor(X,Z),
+    progenitor(Z,Y).
+
+%Relação de descendente(A,B) onde A é descendente de B, essa relação usa recursividade para mostrar todos os ascendentes de A.
+descendente(X,Y) :-
+    progenitor(Y,X).
+
+descendente(X,Y) :-
+    progenitor(Z,X),
+    descendente(Z,Y).
+
+%Relação de tio(A,B) onde A é tio de B, chega se B tem um progenitor e se este progenitor é irmão de A.
+tio(X,Y) :-
+    progenitor(Z,Y),
+    irmao(X,Z),
+    not(progenitor(X,Y)). %o tio não ser pai do proprio filho
+
+%Relação primo(A,B) onde A é primo de B, checa se B tem um progenitor e A tem outro progenitor, e checa a relação de irmandade entre os dois progenitores, por fim checa se A é masculino e diferente de B.
+primo1(X,Y) :-
+    progenitor(Z,Y),
+    progenitor(C,X),
+    (irmao(Z,C); irma(Z,C)),
+    masculino(X),
+    X\=Y.
+
+%% Questão 2
+
+% a) adiciona(X,L1,L2) – onde L2 é a lista que contém o elemento X e a lista L1
+adiciona(X,L1,[X|L1]).
+
+% b) apaga(X,L1,L2) – onde L2 é a lista L1 sem o elemento X.
+apaga(_,[],[]).
+apaga(X, [X|L1],L2):-
+    apaga(X,L1,L2).
+apaga(X, [Y|L1], [Y|L2]):-
+    X\=Y,
+    apaga(X,L1,L2).
+
+% c)membro(X,L) – que é verdadeiro se X pertencer à lista L.
+membro(X,[X|_]).
+membro(X,[_|Y]):-
+    membro(X,Y).
+
+% d) concatena(L1,L2,L3) – onde L3 é resultado da junção das listas L2 e L1.
+concatena([], L1,L1).
+concatena([X|L1], L2, [X|L3]):-    
+    concatena(L1,L2,L3).
+
+ 
+
+% e)comprimento(X,L) –onde X é o número de elementos da lista L. 
+comprimento(0,[]).
+comprimento(X, [_|L]):-
+    comprimento(X1,L),
+    X is 1 + X1.
+
+ 
+
+% f)maximo(X,L) –onde X é o valor máximo da lista L 
+% (assumir que L contém somente números). 
+maximo([X],X).
+maximo([X|L], Y):- 
+    maximo(L, Y), 
+    Y >= X.
+maximo([X|L], X):- 
+    maximo(L, Y), 
+    X >  Y.
+
+ 
+
+% g)media(X,L) –onde X é o valor médio da lista L 
+% (assumir que L contémsomente números. 
+soma([], 0). % A soma de uma lista vazia é zero
+soma([X|R], S) :-
+    soma(R, S1), % Soma os elementos restantes da lista
+    S is X + S1.   % Soma o elemento atual com a soma dos elementos restantes
+
+ 
+
+media(X,L,N) :-
+    comprimento(N,L),
+    soma(S,L),
+    X is S / N.
+
+ 
+
+% h) ordenada(L) | Diz se L estáordenada (ascendentemente).
+ordenada([]).
+ordenada([_]).
+ordenada([X,Y|L]) :-
+    X =< Y,          
+    ordenada([Y|L]).    
+
+%% Questão 3
+
+% Base de fatos para associar os dígitos com as respectivas palavras
+d(0, zero).
+d(1, um).
+d(2, dois).
+d(3, três).
+d(4, quatro).
+d(5, cinco).
+d(6, seis).
+d(7, sete).
+d(8, oito).
+d(9, nove).
+
+% Predicado para converter uma lista de dígitos em uma lista de palavras que mapeia o dígito para a palavra correspondente
+txt([], []).
+txt([X|Digitos], [Y|Palavras]) :-
+    d(X, Y),
+    txt(Digitos, Palavras).
+
+%% Questão 4
+
+% Lê do teclado a entrada do usuario e chama calcular.
+quadrado :-
+    write('Digite um número ou digite "stop" para encerrar: '),
+    read(X),
+    calcular(X).
+
+% Calcular, verificar se foi digitado 'stop' e encerra o programa.
+calcular(stop) :-
+    write('Encerrando o programa...').
+
+% Calcular, salva o valor de X em N e faz N * N e salva em Quadrado para a demonstração no final, depois chama quadrado de novo para pegar uma nova entrada.
+calcular(X) :-
+    N is X,
+    Quadrado is N * N,
+    write('O quadrado de '), write(N), write(' é '), write(Quadrado), nl,
+    quadrado.
+
+%% Questão 5
+
+% a)-------------------------------------------------------------------------
+estrada(a,'B','A',150).
+estrada(b,'A','B',90).
+estrada(c,'B','C',211).
+estrada(d,'G','A',300).
+estrada(e,'B','D',50).
+estrada(f,'B','E',89).
+estrada(g,'A','G',187).
+estrada(h,'D','H',254).
+estrada(i,'F','I',621).
+estrada(j,'C','J',300).
+estrada(k,'I','J',41).
+estrada(l,'D','L',99).
+estrada(m,'H','M',148).
+estrada(n,'Q','M',163).
+estrada(o,'Q','N',69).
+estrada(p,'P','L',10).
+estrada(q,'J','L',364).
+estrada(r,'R','L',79).
+estrada(s,'L','O',193).
+estrada(t,'P','Q',311).
+estrada(u,'P','R',577).
+estrada(v,'N','Q',150).
+estrada(x,'A','D',100).
+
+%funções auxiliares utilizadas na letra b
+inverter([], []).
+inverter([X|Resto], Invert) :-
+  inverter(Resto, R1),
+  concatena(R1, [X], Invert).
+
+pertence(_, []).
+pertence(Elemento, [X|Resto]) :-
+  Elemento \= X,
+  pertence(Elemento, Resto).
+
+% b)-----------------------------------------------------------------
+rota(Origem, Destino, Rota, Custo) :-
+  rotaA(Origem, Destino, [Origem], RotaRev, 0, CustoReverso),
+  inverter(RotaRev, Rota),
+  Custo is CustoReverso.
+
+% Caso base: Para a recusividade quando a Origem for o mesmo que o Destino.
+rotaA(Destino, Destino, Caminho, Caminho, Custo, Custo). 
+
+% Passo de recursão: Pega a Origem, Destino, RotaAtual que seria todo o caminho que já foi feito, Caminho que seria o caminho que estamos verificando atual, CustoAtual é o custo total da rota, Custo é o custo da rota que está sendo verificada no momento.
+rotaA(Origem, Destino, RotaAtual, Caminho, CustoAtual, Custo) :- 
+  % Checa se existe uma estrada para a Origem, como se a Origem fosse o Destino que queremos, salva a proxima cidade e o custo da estrada.
+  estrada(_, Origem, ProximaCidade, CustoEstrada), 
+  % Checa se a cidade que será a proxima já existe na rota que passamos para não ter repetições.
+  pertence(ProximaCidade, RotaAtual), 
+  % Soma o custo que já temos com o custo da rota sendo verificada agora.
+  NovoCusto is CustoAtual + CustoEstrada, 
+  % Chama a função de forma recursiva com a ProximaCidade, e ainda procurando pelo Destino, salva que a rota atual é uma lista onde a ProximaCidade é inserida na cabeça da lista e o Resto da rota é a cauda, pega o NovoCusto para ser o CustoAtual, e pede o Caminho e o Custo.
+  rotaA(ProximaCidade, Destino, [ProximaCidade | RotaAtual], Caminho, NovoCusto, Custo).
+% c)-------------------------------------------------------------------
+rotaC(R, Destino, C) :-
+  estrada(R, _, Destino, C).
+rotaC(R, Destino, C) :-
+  estrada(R, X, Destino, C1),
+  rotaC(R, X, C2),
+  C is C1 + C2.
+
+% d)------------------------------------------------------------------------
+rotaS(R, Origem, C) :-
+  estrada(R, Origem, _, C).
+rotaS(R, Origem, C) :-
+  estrada(R, Origem, X, C1),
+  rotaS(R, X, C2),
+  C is C1 + C2.
+
+% e)----------------------------------------------------------------------
+rotaM(Destino, R, CustoMax) :-
+  rotaZ(R, Destino, Custo),
+  Custo < CustoMax.
+
+rotaZ(R, Destino, C) :-
+  estrada(R, _, Destino, C).
+
+rotaZ(R, Destino, C) :-
+  estrada(R, X, Destino, C1),
+  rotaZ(R, X, C2),
+  C is C1 + C2.
+

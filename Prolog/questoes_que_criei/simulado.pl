@@ -11,10 +11,10 @@
 questao 1: converta uma lista em binário para uma lista em octal.
 questao 2: converta de binario para gray, de 3 em 3 bits
 questao 3: converta um numero recebido em uma lista com seus fatores primos
-questao 4: converta uma lista de 2 bits pra decimal e depois pra alfabeto(<-usar casamento de padrões) (ou seja, 2 retornos).
+questao 4: converta uma lista de 2 bits pra decimal e depois pra alfabeto (<-usar casamento de padrões) (2 retornos).
 questao 5: receba uma lista e devolva outra que é resultado da soma de pares consecutivos da lista dada.
 questao 6: receba uma lista e a divida numa lista so com seus pares e uma so com seus impares.(2 retornos)
-questao 7: mmc de dois numeros.
+questao 7: mmc de dois numeros. 
 questao 8: mdc de dois numeros.
 questao 9: gere uma lista de 5 elementos pseudoaleatorios, com classe de aleatoriedade(m) escolhida pelo usuario.
 */
